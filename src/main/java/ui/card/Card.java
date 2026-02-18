@@ -1,3 +1,8 @@
+package ui.card;
+
+import ui.user.UserUi;
+import product.Product;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,7 +15,7 @@ public abstract class Card extends JPanel {
     Card(Product product, int imageWidth, int imageHeight, int textContainerWidth, int textContainerHeight) {
         this.product = product;
         setBackground(Color.white);
-        setBorder(Shop.BORDER_STYLE);
+        setBorder(UserUi.BORDER_STYLE);
 
         Image loadImage = new ImageIcon(product.image.getScaledInstance(imageWidth, imageHeight, Image.SCALE_SMOOTH)).getImage();
         cardImage = new JLabel(new ImageIcon(loadImage));

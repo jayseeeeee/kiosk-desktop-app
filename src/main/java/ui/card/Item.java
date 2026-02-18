@@ -1,24 +1,29 @@
+package ui.card;
+
+import ui.user.UserUi;
+import product.Product;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
 public class Item extends Card {
-    Item(Product product) {
+    public Item(Product product) {
         super(product, 128, 128, 168, 32);
         setPreferredSize(new Dimension(172, 230));
 
         JLabel itemDescription = new JLabel(String.format("<html>%s</html>", product.description));
-        itemDescription.setFont(new Font(Shop.FONT, Font.ITALIC, 8));
+        itemDescription.setFont(new Font(UserUi.FONT, Font.ITALIC, 8));
 
         JLabel itemPrice = new JLabel(String.format("₱%.2f", product.cost));
         itemPrice.setForeground(new Color(0x68463C));
-        itemPrice.setFont(new Font(Shop.FONT, Font.BOLD, 16));
+        itemPrice.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
 
-        JButton addToCart = new JButton(new ImageIcon(Objects.requireNonNull(getClass().getResource("icons/add.png"))));
+        JButton addToCart = new JButton(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/add.png"))));
         addToCart.setBorderPainted(false);
         addToCart.setContentAreaFilled(false);
         addToCart.setFocusable(false);
-        addToCart.addActionListener(_ -> Product.shop.addBasket(product));
+        addToCart.addActionListener(_ -> Product.shop.basketTab.basketController.addBasket(product));
 
         textContainer.add(itemDescription);
 

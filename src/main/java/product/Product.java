@@ -1,26 +1,30 @@
+package product;
+
+import ui.user.UserUi;
+import ui.card.Basket;
+import ui.card.Item;
+import util.FileHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Product {
-    static ArrayList<Product> listOfProducts = new ArrayList<>();
-    static Shop shop;
+    public static ArrayList<Product> listOfProducts = new ArrayList<>();
+    public static UserUi shop;
 
-    String name;
-    String category;
-    String description;
-    Image image;
-    double cost;
-    Allergy allergies;
-    Item item;
-    Basket basket;
+    public String name;
+    public String category;
+    public String description;
+    public Image image;
+    public double cost;
+    public Allergy allergies;
+    public Item item;
+    public Basket basket;
 
     public Product(String name, String category, String description, String imagePath, double cost, Allergy allergies) {
-        String imageLocation = Shop.IMAGE_FOLDER + "\\" + imagePath;
+        String imageLocation = FileHandler.IMAGE_FOLDER + "\\" + imagePath;
         this.name = name;
         this.category = category;
         this.description = description;
@@ -35,7 +39,7 @@ public class Product {
         basket = new Basket(this);
     }
 
-    public static void setShop(Shop shop) {
+    public static void setShop(UserUi shop) {
         Product.shop = shop;
     }
 }
