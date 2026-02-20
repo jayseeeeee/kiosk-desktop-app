@@ -1,22 +1,19 @@
 package ui.user.queue;
 
 import ui.user.UserUi;
-import ui.user.queue.controller.PaymentController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class CostContainer extends JPanel {
-    private final PaymentContainer paymentContainer;
-    private final PaymentController paymentController;
+    private final QueueTab queueTab;
     public final JLabel initialCost = getInitialCost();
     public final JLabel discountTitle = getDiscountTitle();
     public final JLabel discount = getDiscount();
     public final JLabel finalCost = getFinalCost();
 
     public CostContainer(QueueTab queueTab) {
-        this.paymentContainer = queueTab.paymentContainer;
-        this.paymentController = queueTab.paymentController;
+        this.queueTab = queueTab;
         this.setLayout(new FlowLayout(FlowLayout.TRAILING));
         this.setBackground(UserUi.MAIN_COLOR);
         this.setPreferredSize(new Dimension(320, 64));
@@ -95,7 +92,7 @@ public class CostContainer extends JPanel {
         checkoutButton.setFocusable(false);
         checkoutButton.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
         checkoutButton.setPreferredSize(new Dimension(168, 46));
-        checkoutButton.addActionListener(_ -> paymentController.checkout((String) paymentContainer.paymentMethod.getSelectedItem()));
+        checkoutButton.addActionListener(_ -> queueTab.checkout((String) queueTab.paymentContainer.paymentMethod.getSelectedItem()));
         return checkoutButton;
     }
 }

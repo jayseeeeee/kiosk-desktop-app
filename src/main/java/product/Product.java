@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class Product {
     public static ArrayList<Product> listOfProducts = new ArrayList<>();
-    public static UserUi shop;
 
     public String name;
     public String category;
@@ -35,11 +34,5 @@ public class Product {
             this.image = new ImageIcon(getClass().getResource("assets/no-image.png")).getImage();
         }
         listOfProducts.add(this);
-        item = new Item(this);
-        basket = new Basket(this);
-    }
-
-    public static void setShop(UserUi shop) {
-        Product.shop = shop;
     }
 }

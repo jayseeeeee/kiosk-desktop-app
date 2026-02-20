@@ -5,13 +5,14 @@ import product.Product;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Basket extends Card{
     public JComboBox<Integer> quantity;
     JButton trash;
 
-    public Basket(Product product) {
+    public Basket(Product product, UserUi userUi) {
         super(product, 72, 72, 76, 48);
         setPreferredSize(new Dimension(320, 96));
         setMaximumSize(new Dimension(320, 96));
@@ -26,14 +27,14 @@ public class Basket extends Card{
         quantity = new JComboBox<>(new Integer[] {1,2,3,4,5,6,7,8,9});
         quantity.setPreferredSize(new Dimension(64,32));
         quantity.setFocusable(false);
-        quantity.addActionListener(_ -> Product.shop.queueTab.costController.updateInitialCost());
+        quantity.addActionListener(_ -> userUi.queueTab.updateInitialCost());
 
         trash = new JButton(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/trash.png"))));
         trash.setBorderPainted(false);
         trash.setContentAreaFilled(false);
         trash.setFocusable(false);
         trash.setPreferredSize(new Dimension( 32, 32));
-        trash.addActionListener(_ -> Product.shop.basketTab.basketController.removeBasket(product));
+        trash.addActionListener(_ -> userUi.basketTab.removeBasket(product));
 
         textContainer.add(this.cardTitle);
         textContainer.add(itemPrice);

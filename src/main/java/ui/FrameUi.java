@@ -5,7 +5,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Objects;
 
-public class FrameUi extends JFrame {
+public abstract class FrameUi extends JFrame {
     public final static LineBorder BORDER_STYLE = new LineBorder(new Color(0xFFCFCFCF, true), 1, true);
     public final static Color MAIN_COLOR = new Color(0xFAFAFA);
     public final static String FONT = "Helvetica";
@@ -16,11 +16,14 @@ public class FrameUi extends JFrame {
         Image icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/assets/brand_icon.png"))).getImage();
         this.setIconImage(icon);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1280, 720);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.setUndecorated(true);
+        this.setAlwaysOnTop(true);
+        this.setExtendedState(Frame.MAXIMIZED_BOTH);
         this.add(getLogoPanel(), BorderLayout.NORTH);
         this.add(mainPanel);
+        this.setVisible(true);
     }
 
     public JPanel getLogoPanel() {

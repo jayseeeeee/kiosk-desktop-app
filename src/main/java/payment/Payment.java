@@ -9,8 +9,6 @@ import java.awt.*;
 import java.util.Objects;
 
 public class Payment {
-    UserUi shop;
-
     public static Order pay(String paymentMethod, double finalCost, Product[] basketList) {
         if (paymentMethod.equals("Cashless")) {
             boolean isSuccessful = getGCashNumber(finalCost);

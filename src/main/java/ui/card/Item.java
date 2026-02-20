@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.Objects;
 
 public class Item extends Card {
-    public Item(Product product) {
+    public Item(Product product, UserUi userUi) {
         super(product, 128, 128, 168, 32);
         setPreferredSize(new Dimension(172, 230));
 
@@ -23,7 +23,7 @@ public class Item extends Card {
         addToCart.setBorderPainted(false);
         addToCart.setContentAreaFilled(false);
         addToCart.setFocusable(false);
-        addToCart.addActionListener(_ -> Product.shop.basketTab.basketController.addBasket(product));
+        addToCart.addActionListener(_ -> userUi.basketTab.addBasket(product));
 
         textContainer.add(itemDescription);
 

@@ -1,18 +1,17 @@
 package ui.user.queue;
 
 import ui.user.UserUi;
-import ui.user.queue.controller.PaymentController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class PaymentContainer extends JPanel {
-    private final PaymentController paymentController;
+    private final QueueTab queueTab;
     public final JComboBox<String> paymentMethod = getPaymentMethod();
     public final JTextField promoCode = getPromoCode();
 
     public PaymentContainer(QueueTab queueTab) {
-        this.paymentController = queueTab.paymentController;
+        this.queueTab = queueTab;
         this.setLayout(new FlowLayout(FlowLayout.LEADING));
         this.setBackground(UserUi.MAIN_COLOR);
         this.setPreferredSize(new Dimension(320, 42));
@@ -48,7 +47,7 @@ public class PaymentContainer extends JPanel {
         JTextField promoCode = new JTextField();
         promoCode.setPreferredSize(new Dimension(172, 32));
         promoCode.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
-        promoCode.addActionListener(_ -> paymentController.validateDiscount());
+        promoCode.addActionListener(_ -> queueTab.validateDiscount());
         return promoCode;
     }
 
@@ -56,7 +55,7 @@ public class PaymentContainer extends JPanel {
         JButton apply = new JButton("Apply");
         apply.setFocusable(false);
         apply.setPreferredSize(new Dimension(80, 32));
-        apply.addActionListener(_ -> paymentController.validateDiscount());
+        apply.addActionListener(_ -> queueTab.validateDiscount());
         return apply;
     }
 }

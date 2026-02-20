@@ -1,13 +1,13 @@
 package app;
 
 import product.Product;
-import ui.UiController;
 import ui.admin.AdminUi;
 import ui.user.UserUi;
 import util.CSVParser;
 import util.FileHandler;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 
 public class Main {
@@ -22,6 +22,6 @@ public class Main {
             IO.println(e);
         }
 
-        UiController uiController = new UiController();
+        UserUi userUi = new UserUi();
     }
 }

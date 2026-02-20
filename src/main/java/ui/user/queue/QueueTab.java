@@ -1,19 +1,23 @@
 package ui.user.queue;
 
+import payment.Discount;
+import payment.Payment;
+import product.Product;
+import ui.card.Order;
 import ui.user.UserUi;
-import ui.user.queue.controller.CostController;
-import ui.user.queue.controller.PaymentController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class QueueTab extends JPanel {
     public final UserUi userUi;
     public final JPanel queueContainer = getQueueContainer();
     public final CostContainer costContainer = new CostContainer(this);
     public final PaymentContainer paymentContainer = new PaymentContainer(this);
-    public final PaymentController paymentController = new PaymentController(this);
-    public final CostController costController = new CostController(this);
+    private double initialCost;
+    private double finalCost;
+    private Discount discount;
 
     public QueueTab(UserUi userUi) {
         this.userUi = userUi;
@@ -55,5 +59,81 @@ public class QueueTab extends JPanel {
         JScrollPane listPane = new JScrollPane(queueContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         listPane.setPreferredSize(new Dimension(320, 240));
         return queueContainer;
+    }
+
+    public void updateInitialCost() {
+        initialCost = 0.00;
+        for (Product product : userUi.basketTab.basketList) {
+            int quantity = (int) Objects.requireNonNull(product.basket.quantity.getSelectedItem());
+            initialCost += (product.cost * quantity);
+        }
+        costContainer.initialCost.setText(String.format("₱%.2f", initialCost));
+        updateFinalCost();
+    }
+
+    public void updateFinalCost() {
+        finalCost = initialCost;
+        costContainer.discountTitle.setVisible(getDiscount() != null);
+        costContainer.discount.setVisible(getDiscount() != null);
+
+        // Compute for Full Price Order
+        if (getDiscount() == null) {
+            costContainer.finalCost.setText(String.format("₱%.2f", finalCost));
+            return;
+        }
+
+        // Compute for Discounted Order
+        if (getDiscount().isPercentage) {
+            finalCost = finalCost * (1 - getDiscount().discountCost / 100.00);
+            costContainer.discount.setText(String.format("– %d%%", (int) getDiscount().discountCost));
+        } else {
+            finalCost = finalCost - getDiscount().discountCost;
+            costContainer.discount.setText(String.format("– ₱%.2f", getDiscount().discountCost));
+        }
+        finalCost = Math.max(finalCost, 0.00);
+        costContainer.finalCost.setText(String.format("₱%.2f", finalCost));
+    }
+
+    public double getFinalCost() {
+        return finalCost;
+    }
+
+    public void validateDiscount() {
+        Discount discount = Discount.validate(paymentContainer.promoCode.getText().trim());
+        if (discount == null && !paymentContainer.promoCode.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "The voucher code you entered is invalid or no longer available.", "Voucher", JOptionPane.WARNING_MESSAGE);
+        }
+        updateFinalCost();
+    }
+
+    public void checkout(String paymentMethod) {
+        if (userUi.basketTab.basketList.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Your basket is currently empty.", "Checkout", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Order order = Payment.pay(paymentMethod, getFinalCost(), userUi.basketTab.basketList.toArray(new Product[0]));
+        if (order != null) {
+            userUi.basketTab.basketList.clear();
+
+            if (discount != null) {
+                discount.apply();
+                discount = null;
+                paymentContainer.promoCode.setText("");
+            }
+
+            queueContainer.add(order);
+            queueContainer.revalidate();
+            queueContainer.repaint();
+
+            userUi.basketTab.basketContainer.removeAll();
+            userUi.basketTab.basketContainer.revalidate();
+            userUi.basketTab.basketContainer.repaint();
+
+            updateInitialCost();
+        }
+    }
+
+    public Discount getDiscount() {
+        return discount;
     }
 }
