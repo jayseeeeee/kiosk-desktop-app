@@ -48,7 +48,7 @@ public class Payment {
         dialog.setLocationRelativeTo(null);
 
         String text = String.format("<html>Please pay <b>%.2f</b> with the GCash QR Code</html>", finalCost);
-        ImageIcon imageicon = new ImageIcon(Objects.requireNonNull(Payment.class.getResource("payment/gcash_qr.png")));
+        ImageIcon imageicon = new ImageIcon(Objects.requireNonNull(Payment.class.getResource("assets/gcash_qr.png")));
         ImageIcon qrCode = new ImageIcon(imageicon.getImage().getScaledInstance(480, 480, Image.SCALE_SMOOTH));
         JLabel image = new JLabel(text, qrCode, JLabel.CENTER);
         image.setBackground(Color.white);

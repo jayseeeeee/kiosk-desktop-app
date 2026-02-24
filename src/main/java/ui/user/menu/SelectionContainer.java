@@ -1,5 +1,7 @@
 package ui.user.menu;
 
+import ui.user.UserUi;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,8 +13,8 @@ public class SelectionContainer extends JPanel {
 
     public SelectionContainer(MenuTab menuTab) {
         this.menuTab = menuTab;
-        this.setOpaque(false);
-        this.setPreferredSize(new Dimension(1, 32));
+//        this.setOpaque(false);
+        this.setBackground(Color.red);
         this.add(prevButton);
         this.add(pageSelection);
         this.add(nextButton);
@@ -20,6 +22,7 @@ public class SelectionContainer extends JPanel {
 
     private JButton getPrevButton() {
         JButton prevButton = new JButton("<");
+        prevButton.setFont(new Font(UserUi.FONT, Font.PLAIN, 16));
         prevButton.setFocusable(false);
         prevButton.addActionListener(_ -> menuTab.prevSelection());
         return prevButton;
@@ -27,12 +30,14 @@ public class SelectionContainer extends JPanel {
 
     private JTextField getPageSelection() {
         JTextField pageSelection = new JTextField("1");
+        pageSelection.setFont(new Font(UserUi.FONT, Font.PLAIN, 16));
         pageSelection.addActionListener(_ -> menuTab.changeSelection());
         return pageSelection;
     }
 
     private JButton getNextButton() {
         JButton nextButton = new JButton(">");
+        nextButton.setFont(new Font(UserUi.FONT, Font.PLAIN, 16));
         nextButton.setFocusable(false);
         nextButton.addActionListener(_ -> menuTab.nextSelection());
         return nextButton;

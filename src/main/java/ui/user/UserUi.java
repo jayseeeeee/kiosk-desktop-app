@@ -16,5 +16,6 @@ public class UserUi extends FrameUi {
         this.mainPanel.add(menuTab);
         this.mainPanel.add(queueTab);
         menuTab.updateMenuContainer();
+        basketTab.updateBasket();
     }
 }

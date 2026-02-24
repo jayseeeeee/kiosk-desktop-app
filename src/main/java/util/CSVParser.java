@@ -64,9 +64,9 @@ public class CSVParser {
             if (fileName.equals(CSV_FILES[0])) {
                 writer.write("Name,Category,Description,Image,Price,Allergies");
             } else if (fileName.equals(CSV_FILES[1])) {
-                writer.write("Voucher Code,payment.Discount Amount,Percentage,Uses");
+                writer.write("Code,Amount,Percentage,Uses");
             } else if (fileName.equals(CSV_FILES[2])) {
-                writer.write("Voucher Code,payment.Discount Amount,Percentage,Uses");
+//                writer.write("Code,Amount,Percentage,Uses");
             }
             IO.println("File has been successfully written!");
         } catch(FileNotFoundException e){

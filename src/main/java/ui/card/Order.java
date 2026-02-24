@@ -45,9 +45,9 @@ public class Order extends JPanel {
     private void setStatus(int status) {
         ImageIcon statusIcon = null;
         switch (status) {
-            case PAYMENT -> statusIcon = new ImageIcon(Objects.requireNonNull(getClass().getResource("status/payment.png")));
-            case PREPARING -> statusIcon = new ImageIcon(Objects.requireNonNull(getClass().getResource("status/preparing.png")));
-            case SERVING -> statusIcon = new ImageIcon(Objects.requireNonNull(getClass().getResource("status/serving.png")));
+            case PAYMENT -> statusIcon = new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/payment.png")));
+            case PREPARING -> statusIcon = new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/preparing.png")));
+            case SERVING -> statusIcon = new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/serving.png")));
         }
         this.orderStatus.setIcon(statusIcon);
     }

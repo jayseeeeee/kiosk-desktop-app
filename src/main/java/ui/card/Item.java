@@ -2,6 +2,7 @@ package ui.card;
 
 import ui.user.UserUi;
 import product.Product;
+import util.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,25 +10,25 @@ import java.util.Objects;
 
 public class Item extends Card {
     public Item(Product product, UserUi userUi) {
-        super(product, 128, 128, 168, 32);
-        setPreferredSize(new Dimension(172, 230));
+        super(product, 240, 240, 240, 40);
+        setPreferredSize(new Dimension(300, 356));
 
         JLabel itemDescription = new JLabel(String.format("<html>%s</html>", product.description));
-        itemDescription.setFont(new Font(UserUi.FONT, Font.ITALIC, 8));
+        itemDescription.setFont(new Font(UserUi.FONT, Font.ITALIC, 12));
 
         JLabel itemPrice = new JLabel(String.format("₱%.2f", product.cost));
         itemPrice.setForeground(new Color(0x68463C));
         itemPrice.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
 
-        JButton addToCart = new JButton(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/add.png"))));
+        JButton addToCart = new JButton(FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "add.png", 32));
         addToCart.setBorderPainted(false);
         addToCart.setContentAreaFilled(false);
         addToCart.setFocusable(false);
         addToCart.addActionListener(_ -> userUi.basketTab.addBasket(product));
 
-        textContainer.add(itemDescription);
+        this.textContainer.add(itemDescription);
 
-        add(itemPrice);
-        add(addToCart);
+        this.add(itemPrice);
+        this.add(addToCart);
     }
 }

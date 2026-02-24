@@ -1,8 +1,12 @@
 package ui;
 
+import ui.user.UserUi;
+import util.FileHandler;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.image.ImageObserver;
 import java.util.Objects;
 
 public abstract class FrameUi extends JFrame {
@@ -16,33 +20,24 @@ public abstract class FrameUi extends JFrame {
         Image icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/assets/brand_icon.png"))).getImage();
         this.setIconImage(icon);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
         this.setUndecorated(true);
         this.setAlwaysOnTop(true);
         this.setExtendedState(Frame.MAXIMIZED_BOTH);
-        this.add(getLogoPanel(), BorderLayout.NORTH);
+        this.add(getLogo(128), BorderLayout.NORTH);
         this.add(mainPanel);
         this.setVisible(true);
     }
 
-    public JPanel getLogoPanel() {
+    public JPanel getLogo(int height) {
+        JLabel logo = new JLabel(FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "brand_logo.png", height));
         JPanel logoPanel = new JPanel(new BorderLayout());
-        logoPanel.setBackground(new Color(0xF3F3F3));
-        logoPanel.setPreferredSize(new Dimension(1280, 72));
-        logoPanel.add(getLogo());
+        logoPanel.setPreferredSize(new Dimension(1280, height));
+        logoPanel.add(logo);
         return logoPanel;
-    }
-
-    public JLabel getLogo() {
-        ImageIcon image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/assets/brand_logo.png")));
-        JLabel logo = new JLabel(image);
-        return logo;
     }
 
     public JPanel getMainPanel() {
         JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(Color.white);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
         return mainPanel;
     }

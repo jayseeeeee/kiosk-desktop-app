@@ -9,7 +9,8 @@ import java.util.LinkedList;
 
 public class BasketTab extends JPanel {
     public final UserUi userUi;
-    public final JPanel basketContainer = new JPanel();
+    public final LabelContainer labelContainer = new LabelContainer();
+    public final ScrollPaneContainer scrollPaneContainer = new ScrollPaneContainer();
 
     public final LinkedList<Product> basketList = new LinkedList<>();
 
@@ -17,49 +18,29 @@ public class BasketTab extends JPanel {
         this.userUi = userUi;
         this.setBackground(UserUi.MAIN_COLOR);
         this.setBorder(UserUi.BORDER_STYLE);
-        this.setPreferredSize(new Dimension(1, 1));
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
-        this.add(getTitle());
-        this.add(getDescription());
-        this.add(getScrollPane());
+        this.setPreferredSize(new Dimension(1, 1));
+        this.add(labelContainer);
+        this.add(scrollPaneContainer);
     }
 
-    private JLabel getTitle() {
-        JLabel basketTitle = new JLabel("BASKET");
-        basketTitle.setPreferredSize(new Dimension(225, 50));
-        basketTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 24));
-        return basketTitle;
-    }
-
-    private JLabel getDescription() {
-        JLabel basketDescription = new JLabel("EDIT ORDER");
-        basketDescription.setFont(new Font(UserUi.FONT, Font.BOLD, 10));
-        return basketDescription;
-    }
-
-    private JScrollPane getScrollPane() {
-        JScrollPane scrollPane = new JScrollPane(basketContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setPreferredSize(new Dimension(320, 640));
-        return scrollPane;
-    }
-
-    private void updateBasket() {
-        basketContainer.removeAll();
+    public void updateBasket() {
+        scrollPaneContainer.basketContainer.removeAll();
         if (basketList.isEmpty()) {
-            basketContainer.setLayout(new BorderLayout());
+            scrollPaneContainer.basketContainer.setLayout(new BorderLayout());
             JLabel emptyResultTitle = new JLabel("BASKET IS EMPTY");
-            emptyResultTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 12));
+            emptyResultTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
             emptyResultTitle.setHorizontalAlignment(JLabel.CENTER);
             emptyResultTitle.setPreferredSize(new Dimension(256,  256));
-            basketContainer.add(emptyResultTitle);
+            scrollPaneContainer.basketContainer.add(emptyResultTitle);
         } else {
-            basketContainer.setLayout(new BoxLayout(basketContainer, BoxLayout.Y_AXIS));
+            scrollPaneContainer.basketContainer.setLayout(new BoxLayout(scrollPaneContainer.basketContainer, BoxLayout.Y_AXIS));
             for (Product product : basketList) {
-                basketContainer.add(product.basket);
+                scrollPaneContainer.basketContainer.add(product.basket);
             }
         }
-        basketContainer.revalidate();
-        basketContainer.repaint();
+        scrollPaneContainer.basketContainer.revalidate();
+        scrollPaneContainer.basketContainer.repaint();
         userUi.queueTab.updateInitialCost();
     }
 

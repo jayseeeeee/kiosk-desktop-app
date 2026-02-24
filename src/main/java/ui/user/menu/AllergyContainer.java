@@ -11,9 +11,10 @@ public class AllergyContainer extends JPanel {
 
     public AllergyContainer(MenuTab menuTab) {
         this.menuTab = menuTab;
-        this.setBackground(UserUi.MAIN_COLOR);
-        this.setPreferredSize(new Dimension(Integer.MIN_VALUE, 32));
+//        this.setBackground(UserUi.MAIN_COLOR);
+        this.setBackground(Color.blue);
         this.add(getAllergyTitle());
+        this.add(Box.createHorizontalStrut(32));
         for (String allergy : Allergy.listOfAllergies) {
             this.add(getAllergyCheckBox(allergy));
         }
@@ -21,7 +22,7 @@ public class AllergyContainer extends JPanel {
 
     public JLabel getAllergyTitle() {
         JLabel allergyTitle = new JLabel("FILTER FOOD ALLERGY");
-        allergyTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 10));
+        allergyTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
         return allergyTitle;
     }
 
@@ -29,7 +30,7 @@ public class AllergyContainer extends JPanel {
         JCheckBox allergyCheckBox = new JCheckBox(allergy);
         allergyCheckBox.setFocusable(false);
         allergyCheckBox.setContentAreaFilled(false);
-        allergyCheckBox.setFont(new Font(UserUi.FONT, Font.BOLD, 12));
+        allergyCheckBox.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
         allergyCheckBox.setBackground(UserUi.MAIN_COLOR);
         allergyCheckBox.addItemListener(_ -> menuTab.updateAllergy(allergyCheckBox, allergy));
         return allergyCheckBox;

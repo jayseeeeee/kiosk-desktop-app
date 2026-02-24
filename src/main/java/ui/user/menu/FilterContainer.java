@@ -1,6 +1,7 @@
 package ui.user.menu;
 
 import ui.user.UserUi;
+import util.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,9 +16,8 @@ public class FilterContainer extends JPanel {
 
     public FilterContainer(MenuTab menuTab) {
         this.menuTab = menuTab;
-//        this.setBackground(UserUi.MAIN_COLOR);
-        this.setBackground(Color.green);
-        this.setPreferredSize(new Dimension(580, 40));
+        this.setBackground(UserUi.MAIN_COLOR);
+        this.setBackground(Color.orange);
         this.add(searchField);
         this.add(searchButton);
         this.add(categories);
@@ -25,22 +25,23 @@ public class FilterContainer extends JPanel {
 
     private JTextField getSearchField() {
         JTextField searchField = new JTextField();
-        searchField.setPreferredSize(new Dimension(256, 32));
+        searchField.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
+        searchField.setPreferredSize(new Dimension(320, 48));
         searchField.addActionListener(_ -> menuTab.updateMenuContainer());
         return searchField;
     }
 
     private JButton getSearchButton() {
-        JButton searchButton = new JButton(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/search.png"))));
+        JButton searchButton = new JButton(FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "search.png", 48));
         searchButton.setContentAreaFilled(false);
-        searchButton.setPreferredSize(new Dimension(32, 32));
         searchButton.addActionListener(_ -> menuTab.updateMenuContainer());
         return searchButton;
     }
 
     private JComboBox<String> getCategories() {
         JComboBox<String> categories = new JComboBox<>(new String[] {"Show All", "Coffee", "Tea", "Pastry", "Sandwich"});
-        categories.setPreferredSize(new Dimension(128, 32));
+        categories.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
+        categories.setPreferredSize(new Dimension(180, 48));
         categories.setFocusable(false);
         categories.addActionListener(_ -> menuTab.updateMenuContainer());
         return categories;

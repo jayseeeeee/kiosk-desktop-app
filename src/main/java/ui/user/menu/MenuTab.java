@@ -26,8 +26,8 @@ public class MenuTab extends JPanel{
         this.userUi = userUi;
         this.setBackground(UserUi.MAIN_COLOR);
         this.setBorder(UserUi.BORDER_STYLE);
-        this.setPreferredSize(new Dimension(256, 1));
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setPreferredSize(new Dimension(575, 1));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.add(filterContainer);
         this.add(allergyContainer);
         this.add(menuContainer);
@@ -37,7 +37,8 @@ public class MenuTab extends JPanel{
     private JPanel getMenuContainer() {
         JPanel menuContainer = new JPanel();
         menuContainer.setBackground(UserUi.MAIN_COLOR);
-        menuContainer.setPreferredSize(new Dimension(Integer.MIN_VALUE, 720));
+        menuContainer.setBackground(Color.green);
+        menuContainer.setPreferredSize(new Dimension(1000, 800));
         return menuContainer;
     }
 
@@ -63,7 +64,7 @@ public class MenuTab extends JPanel{
 
     private void showMenu() {
         menuContainer.removeAll();
-        menuContainer.setLayout(new FlowLayout(FlowLayout.LEADING, 18, 18));
+        menuContainer.setLayout(new FlowLayout(FlowLayout.LEADING, 25, 25));
         int currentPage = Integer.parseInt(selectionContainer.pageSelection.getText()) - 1;
         int currentItem = currentPage * 6;
         for (int i = currentItem; i < (Math.min(currentItem + 6, (menuList.size()))); i++) {
@@ -100,33 +101,25 @@ public class MenuTab extends JPanel{
     public void showEmptyMenu() {
         menuContainer.removeAll();
         menuContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
-        menuContainer.add(getEmptyResultPanel());
         menuContainer.add(getEmptyResultTitle());
         menuContainer.add(getEmptyResultTip());
         menuContainer.revalidate();
         menuContainer.repaint();
     }
 
-    private JPanel getEmptyResultPanel() {
-        JPanel emptyResultPanel = new JPanel();
-        emptyResultPanel.setBackground(UserUi.MAIN_COLOR);
-        emptyResultPanel.setPreferredSize(new Dimension(1000,210));
-        return emptyResultPanel;
-    }
-
     private JLabel getEmptyResultTitle() {
         JLabel emptyResultTitle = new JLabel("NO MATCHING PRODUCTS FOUND");
-        emptyResultTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 14));
+        emptyResultTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 32));
         emptyResultTitle.setHorizontalAlignment(JLabel.CENTER);
-        emptyResultTitle.setPreferredSize(new Dimension(512, 14));
+        emptyResultTitle.setVerticalTextPosition(JLabel.BOTTOM);
+        emptyResultTitle.setPreferredSize(new Dimension(1000, 500));
         return emptyResultTitle;
     }
 
     private JLabel getEmptyResultTip() {
         JLabel emptyResultTip = new JLabel("TRY ADJUSTING YOUR SEARCH FILTER.");
-        emptyResultTip.setFont(new Font(UserUi.FONT, Font.BOLD, 12));
+        emptyResultTip.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
         emptyResultTip.setHorizontalAlignment(JLabel.CENTER);
-        emptyResultTip.setPreferredSize(new Dimension(512,  12));
         return emptyResultTip;
     }
 

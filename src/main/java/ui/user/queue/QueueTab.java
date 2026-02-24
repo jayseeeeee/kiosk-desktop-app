@@ -125,9 +125,9 @@ public class QueueTab extends JPanel {
             queueContainer.revalidate();
             queueContainer.repaint();
 
-            userUi.basketTab.basketContainer.removeAll();
-            userUi.basketTab.basketContainer.revalidate();
-            userUi.basketTab.basketContainer.repaint();
+            userUi.basketTab.scrollPaneContainer.basketContainer.removeAll();
+            userUi.basketTab.scrollPaneContainer.basketContainer.revalidate();
+            userUi.basketTab.scrollPaneContainer.basketContainer.repaint();
 
             updateInitialCost();
         }

@@ -16,23 +16,19 @@ public class Product {
     public String name;
     public String category;
     public String description;
-    public Image image;
+    public String imagePath;
     public double cost;
     public Allergy allergies;
     public Item item;
     public Basket basket;
 
     public Product(String name, String category, String description, String imagePath, double cost, Allergy allergies) {
-        String imageLocation = FileHandler.IMAGE_FOLDER + "\\" + imagePath;
         this.name = name;
         this.category = category;
         this.description = description;
         this.cost = cost;
         this.allergies = allergies;
-        this.image = new ImageIcon(imageLocation).getImage();
-        if (!new File(imageLocation).exists()) {
-            this.image = new ImageIcon(getClass().getResource("assets/no-image.png")).getImage();
-        }
+        this.imagePath = imagePath;
         listOfProducts.add(this);
     }
 }
