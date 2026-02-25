@@ -19,13 +19,11 @@ public abstract class Card extends JPanel {
         this.setBorder(UserUi.BORDER_STYLE);
 
         cardImage = new JLabel(FileHandler.scaleImage(FileHandler.IMAGE_FOLDER, product.imagePath, imageHeight, imageWidth));
-
         cardTitle = new JLabel(product.name);
-//        cardTitle.setPreferredSize(new Dimension(textContainerWidth, 16));
-        cardTitle.setFont(new Font("Helvetica", Font.BOLD, 16));
+        cardTitle.setFont(new Font("Helvetica", Font.BOLD, 18));
 
         textContainer = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        textContainer.setBackground(Color.pink);
+        textContainer.setOpaque(false);
         textContainer.setPreferredSize(new Dimension(textContainerWidth, textContainerHeight));
         textContainer.setLayout(new BoxLayout(textContainer, BoxLayout.Y_AXIS));
         textContainer.add(cardTitle);

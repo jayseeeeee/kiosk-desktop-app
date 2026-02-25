@@ -18,8 +18,8 @@ public class Product {
     public String description;
     public String imagePath;
     public double cost;
+    public int quantity;
     public Allergy allergies;
-    public Item item;
     public Basket basket;
 
     public Product(String name, String category, String description, String imagePath, double cost, Allergy allergies) {

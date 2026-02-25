@@ -64,8 +64,7 @@ public class QueueTab extends JPanel {
     public void updateInitialCost() {
         initialCost = 0.00;
         for (Product product : userUi.basketTab.basketList) {
-            int quantity = (int) Objects.requireNonNull(product.basket.quantity.getSelectedItem());
-            initialCost += (product.cost * quantity);
+            initialCost += (product.cost * product.quantity);
         }
         costContainer.initialCost.setText(String.format("₱%.2f", initialCost));
         updateFinalCost();

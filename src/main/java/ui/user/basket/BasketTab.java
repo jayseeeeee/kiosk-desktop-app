@@ -1,18 +1,19 @@
 package ui.user.basket;
 
 import product.Product;
+import ui.card.Basket;
 import ui.user.UserUi;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
 
 public class BasketTab extends JPanel {
     public final UserUi userUi;
     public final LabelContainer labelContainer = new LabelContainer();
     public final ScrollPaneContainer scrollPaneContainer = new ScrollPaneContainer();
 
-    public final LinkedList<Product> basketList = new LinkedList<>();
+    public final LinkedHashSet<Product> basketList = new LinkedHashSet<>();
 
     public BasketTab(UserUi userUi) {
         this.userUi = userUi;
@@ -36,7 +37,7 @@ public class BasketTab extends JPanel {
         } else {
             scrollPaneContainer.basketContainer.setLayout(new BoxLayout(scrollPaneContainer.basketContainer, BoxLayout.Y_AXIS));
             for (Product product : basketList) {
-                scrollPaneContainer.basketContainer.add(product.basket);
+                scrollPaneContainer.basketContainer.add(new Basket(product, userUi));
             }
         }
         scrollPaneContainer.basketContainer.revalidate();
@@ -45,19 +46,14 @@ public class BasketTab extends JPanel {
     }
 
     public void addBasket(Product product) {
-        if (basketList.contains(product)) {
-            JComboBox<Integer> quantityComboBox = product.basket.quantity;
-            int selectedIndex = quantityComboBox.getSelectedIndex();
-            quantityComboBox.setSelectedIndex(Math.min(quantityComboBox.getItemCount() - 1, ++selectedIndex));
-        } else {
-            basketList.push(product);
-        }
+        product.quantity = Math.min(9, ++product.quantity);
+        basketList.addFirst(product);
         updateBasket();
     }
 
     public void removeBasket(Product product) {
+        product.quantity = 0;
         basketList.remove(product);
-        product.basket.quantity.setSelectedIndex(0);
         System.out.println(basketList);
         updateBasket();
     }

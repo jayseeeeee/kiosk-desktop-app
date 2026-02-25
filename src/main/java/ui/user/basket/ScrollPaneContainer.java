@@ -10,7 +10,9 @@ public class ScrollPaneContainer extends JPanel {
 
     ScrollPaneContainer() {
         this.setBackground(UserUi.MAIN_COLOR);
-        this.add(new JScrollPane(basketContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
+        JScrollPane scrollPane = new JScrollPane(basketContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setBorder(UserUi.BORDER_STYLE);
+        this.add(scrollPane);
     }
 
     private JPanel getBasketContainer() {

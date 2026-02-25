@@ -27,7 +27,7 @@ public class MenuTab extends JPanel{
         this.setBackground(UserUi.MAIN_COLOR);
         this.setBorder(UserUi.BORDER_STYLE);
         this.setPreferredSize(new Dimension(575, 1));
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         this.add(filterContainer);
         this.add(allergyContainer);
         this.add(menuContainer);
@@ -37,7 +37,6 @@ public class MenuTab extends JPanel{
     private JPanel getMenuContainer() {
         JPanel menuContainer = new JPanel();
         menuContainer.setBackground(UserUi.MAIN_COLOR);
-        menuContainer.setBackground(Color.green);
         menuContainer.setPreferredSize(new Dimension(1000, 800));
         return menuContainer;
     }
@@ -64,7 +63,7 @@ public class MenuTab extends JPanel{
 
     private void showMenu() {
         menuContainer.removeAll();
-        menuContainer.setLayout(new FlowLayout(FlowLayout.LEADING, 25, 25));
+        menuContainer.setLayout(new FlowLayout(FlowLayout.LEADING, 25, 20));
         int currentPage = Integer.parseInt(selectionContainer.pageSelection.getText()) - 1;
         int currentItem = currentPage * 6;
         for (int i = currentItem; i < (Math.min(currentItem + 6, (menuList.size()))); i++) {
@@ -111,8 +110,8 @@ public class MenuTab extends JPanel{
         JLabel emptyResultTitle = new JLabel("NO MATCHING PRODUCTS FOUND");
         emptyResultTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 32));
         emptyResultTitle.setHorizontalAlignment(JLabel.CENTER);
-        emptyResultTitle.setVerticalTextPosition(JLabel.BOTTOM);
-        emptyResultTitle.setPreferredSize(new Dimension(1000, 500));
+        emptyResultTitle.setVerticalAlignment(JLabel.BOTTOM);
+        emptyResultTitle.setPreferredSize(new Dimension(1000, 400));
         return emptyResultTitle;
     }
 

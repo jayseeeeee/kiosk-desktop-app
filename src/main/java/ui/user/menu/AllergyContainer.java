@@ -11,8 +11,7 @@ public class AllergyContainer extends JPanel {
 
     public AllergyContainer(MenuTab menuTab) {
         this.menuTab = menuTab;
-//        this.setBackground(UserUi.MAIN_COLOR);
-        this.setBackground(Color.blue);
+        this.setBackground(UserUi.MAIN_COLOR);
         this.add(getAllergyTitle());
         this.add(Box.createHorizontalStrut(32));
         for (String allergy : Allergy.listOfAllergies) {

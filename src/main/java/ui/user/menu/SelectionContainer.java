@@ -13,8 +13,7 @@ public class SelectionContainer extends JPanel {
 
     public SelectionContainer(MenuTab menuTab) {
         this.menuTab = menuTab;
-//        this.setOpaque(false);
-        this.setBackground(Color.red);
+        this.setOpaque(false);
         this.add(prevButton);
         this.add(pageSelection);
         this.add(nextButton);
