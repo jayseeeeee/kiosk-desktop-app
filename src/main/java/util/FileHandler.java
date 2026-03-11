@@ -39,7 +39,6 @@ public class FileHandler {
     public static ImageIcon scaleImage(File location, String name, int targetHeight) {
         ImageIcon image = new ImageIcon(location + "\\" + name);
         float scaleRatio = (float) targetHeight / image.getIconHeight();
-        System.out.println(scaleRatio);
         return new ImageIcon(
                 image.getImage().getScaledInstance(
                         (int) (image.getIconWidth() * scaleRatio),

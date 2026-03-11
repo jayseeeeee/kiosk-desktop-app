@@ -1,7 +1,7 @@
 package ui.card;
 
 import ui.user.UserUi;
-import product.Product;
+import app.Product;
 import util.FileHandler;
 
 import javax.swing.*;

@@ -38,7 +38,7 @@ public abstract class FrameUi extends JFrame {
 
     public JPanel getMainPanel() {
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+        mainPanel.setBackground(MAIN_COLOR);
         return mainPanel;
     }
 }

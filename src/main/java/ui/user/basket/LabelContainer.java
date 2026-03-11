@@ -8,7 +8,7 @@ import java.awt.*;
 public class LabelContainer extends JPanel {
 
     LabelContainer() {
-        this.setBackground(UserUi.MAIN_COLOR);
+        this.setOpaque(false);
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.add(getTitle());
         this.add(Box.createHorizontalStrut(164));

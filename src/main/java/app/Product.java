@@ -1,13 +1,5 @@
-package product;
+package app;
 
-import ui.user.UserUi;
-import ui.card.Basket;
-import ui.card.Item;
-import util.FileHandler;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
 import java.util.ArrayList;
 
 public class Product {
@@ -20,7 +12,6 @@ public class Product {
     public double cost;
     public int quantity;
     public Allergy allergies;
-    public Basket basket;
 
     public Product(String name, String category, String description, String imagePath, double cost, Allergy allergies) {
         this.name = name;

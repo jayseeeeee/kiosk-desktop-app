@@ -1,12 +1,11 @@
 package ui.card;
 
 import ui.user.UserUi;
-import product.Product;
+import app.Product;
 import util.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 
 public class Item extends Card {
     public Item(Product product, UserUi userUi) {

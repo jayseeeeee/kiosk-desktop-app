@@ -1,9 +1,8 @@
 package util;
 
-import ui.user.UserUi;
-import payment.Discount;
-import product.Allergy;
-import product.Product;
+import app.Discount;
+import app.Allergy;
+import app.Product;
 
 import javax.swing.*;
 import java.io.*;
@@ -11,8 +10,7 @@ import java.io.*;
 public class CSVParser {
     private final static String[] CSV_FILES = {
             "Products.csv",
-            "Discounts.csv",
-            "Orders.csv"
+            "Discounts.csv"
     };
     private final static String CONFIG_MESSAGE = """
                 Configure the CSV files under 'My Shop' folder in your Documents folder.
@@ -65,8 +63,6 @@ public class CSVParser {
                 writer.write("Name,Category,Description,Image,Price,Allergies");
             } else if (fileName.equals(CSV_FILES[1])) {
                 writer.write("Code,Amount,Percentage,Uses");
-            } else if (fileName.equals(CSV_FILES[2])) {
-//                writer.write("Code,Amount,Percentage,Uses");
             }
             IO.println("File has been successfully written!");
         } catch(FileNotFoundException e){
@@ -76,7 +72,5 @@ public class CSVParser {
             IO.println("Error: File could not be written.");
             IO.println(e);
         }
-
     }
-
 }

@@ -1,7 +1,7 @@
 package ui.user.menu;
 
 import ui.user.UserUi;
-import product.Allergy;
+import app.Allergy;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +11,7 @@ public class AllergyContainer extends JPanel {
 
     public AllergyContainer(MenuTab menuTab) {
         this.menuTab = menuTab;
-        this.setBackground(UserUi.MAIN_COLOR);
+        this.setOpaque(false);
         this.add(getAllergyTitle());
         this.add(Box.createHorizontalStrut(32));
         for (String allergy : Allergy.listOfAllergies) {
@@ -30,7 +30,7 @@ public class AllergyContainer extends JPanel {
         allergyCheckBox.setFocusable(false);
         allergyCheckBox.setContentAreaFilled(false);
         allergyCheckBox.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
-        allergyCheckBox.setBackground(UserUi.MAIN_COLOR);
+        allergyCheckBox.setOpaque(false);
         allergyCheckBox.addItemListener(_ -> menuTab.updateAllergy(allergyCheckBox, allergy));
         return allergyCheckBox;
     }

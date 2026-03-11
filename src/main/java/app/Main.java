@@ -1,17 +1,13 @@
 package app;
 
-import product.Product;
-import ui.admin.AdminUi;
 import ui.user.UserUi;
 import util.CSVParser;
 import util.FileHandler;
 
 import javax.swing.*;
-import java.awt.*;
-import java.io.File;
 
 public class Main {
-    public static void main(String[] args) {
+    static void main() {
 
         FileHandler.setDirectories();
         CSVParser.readAllCsvFiles();
@@ -23,5 +19,6 @@ public class Main {
         }
 
         UserUi userUi = new UserUi();
+        userUi.setUi(UserUi.MAIN_MENU_UI);
     }
 }

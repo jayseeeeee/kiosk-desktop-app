@@ -16,7 +16,7 @@ public class FilterContainer extends JPanel {
 
     public FilterContainer(MenuTab menuTab) {
         this.menuTab = menuTab;
-        this.setBackground(UserUi.MAIN_COLOR);
+        this.setOpaque(false);
         this.add(searchField);
         this.add(searchButton);
         this.add(categories);

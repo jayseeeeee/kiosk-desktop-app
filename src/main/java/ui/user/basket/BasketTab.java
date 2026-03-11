@@ -1,6 +1,6 @@
 package ui.user.basket;
 
-import product.Product;
+import app.Product;
 import ui.card.Basket;
 import ui.user.UserUi;
 
@@ -11,37 +11,43 @@ import java.util.LinkedHashSet;
 public class BasketTab extends JPanel {
     public final UserUi userUi;
     public final LabelContainer labelContainer = new LabelContainer();
-    public final ScrollPaneContainer scrollPaneContainer = new ScrollPaneContainer();
+    public final JPanel basketContainer = new JPanel();
 
     public final LinkedHashSet<Product> basketList = new LinkedHashSet<>();
 
     public BasketTab(UserUi userUi) {
         this.userUi = userUi;
-        this.setBackground(UserUi.MAIN_COLOR);
+        this.setOpaque(false);
         this.setBorder(UserUi.BORDER_STYLE);
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setPreferredSize(new Dimension(1, 1));
         this.add(labelContainer);
-        this.add(scrollPaneContainer);
+        this.add(getScrollPane());
+    }
+
+    private JScrollPane getScrollPane() {
+        JScrollPane scrollPane = new JScrollPane(basketContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setPreferredSize(new Dimension(420, 840));
+        return scrollPane;
     }
 
     public void updateBasket() {
-        scrollPaneContainer.basketContainer.removeAll();
+        basketContainer.removeAll();
         if (basketList.isEmpty()) {
-            scrollPaneContainer.basketContainer.setLayout(new BorderLayout());
+            basketContainer.setLayout(new BorderLayout());
             JLabel emptyResultTitle = new JLabel("BASKET IS EMPTY");
+            emptyResultTitle.setOpaque(true);
             emptyResultTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
             emptyResultTitle.setHorizontalAlignment(JLabel.CENTER);
-            emptyResultTitle.setPreferredSize(new Dimension(256,  256));
-            scrollPaneContainer.basketContainer.add(emptyResultTitle);
+            basketContainer.add(emptyResultTitle);
         } else {
-            scrollPaneContainer.basketContainer.setLayout(new BoxLayout(scrollPaneContainer.basketContainer, BoxLayout.Y_AXIS));
+            basketContainer.setLayout(new BoxLayout(basketContainer, BoxLayout.Y_AXIS));
             for (Product product : basketList) {
-                scrollPaneContainer.basketContainer.add(new Basket(product, userUi));
+                basketContainer.add(new Basket(product, userUi));
             }
         }
-        scrollPaneContainer.basketContainer.revalidate();
-        scrollPaneContainer.basketContainer.repaint();
+        basketContainer.revalidate();
+        basketContainer.repaint();
         userUi.queueTab.updateInitialCost();
     }
 

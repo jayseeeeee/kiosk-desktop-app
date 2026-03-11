@@ -1,9 +1,11 @@
 package ui.user.queue;
 
 import ui.user.UserUi;
+import util.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class PaymentContainer extends JPanel {
     private final QueueTab queueTab;
@@ -12,49 +14,45 @@ public class PaymentContainer extends JPanel {
 
     public PaymentContainer(QueueTab queueTab) {
         this.queueTab = queueTab;
+        this.setPreferredSize(new Dimension(420, 200));
         this.setLayout(new FlowLayout(FlowLayout.LEADING));
-        this.setBackground(UserUi.MAIN_COLOR);
-        this.setPreferredSize(new Dimension(320, 42));
+        this.setOpaque(false);
         this.add(getPaymentTitle());
-        this.add(getPaymentMethodContainer());
+        this.add(paymentMethod);
+        this.add(promoCode);
+        this.add(getApplyButton());
     }
 
     private JLabel getPaymentTitle() {
         JLabel paymentTitle = new JLabel("PAYMENT");
-        paymentTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 24));
+        paymentTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 36));
         return paymentTitle;
     }
 
-    private JPanel getPaymentMethodContainer() {
-        JPanel paymentMethodContainer = new JPanel();
-        paymentMethodContainer.setBackground(UserUi.MAIN_COLOR);
-        paymentMethodContainer.setPreferredSize(new Dimension(320, 92));
-        paymentMethodContainer.add(paymentMethod);
-        paymentMethodContainer.add(promoCode);
-        paymentMethodContainer.add(getApplyButton());
-        return paymentMethodContainer;
-    }
-
     private JComboBox<String> getPaymentMethod() {
-        JComboBox<String> paymentMethod = new JComboBox<>(new String[] {"Pay on Counter", "Cashless"});
-        paymentMethod.setPreferredSize(new Dimension(256, 42));
-        paymentMethod.setFont(new Font(UserUi.FONT, Font.PLAIN, 16));
+        JComboBox<String> paymentMethod = new JComboBox<>(new String[] {"Pay on Counter"});
+        paymentMethod.setPreferredSize(new Dimension(405, 64));
+        paymentMethod.setFont(new Font(UserUi.FONT, Font.PLAIN, 18));
         paymentMethod.setFocusable(false);
+        if (new File(FileHandler.ASSETS_FOLDER + "/" + "qr_code.png").exists()) {
+            paymentMethod.addItem("Cashless");
+        }
         return paymentMethod;
     }
 
     private JTextField getPromoCode() {
         JTextField promoCode = new JTextField();
-        promoCode.setPreferredSize(new Dimension(172, 32));
-        promoCode.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
+        promoCode.setPreferredSize(new Dimension(300, 48));
+        promoCode.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
         promoCode.addActionListener(_ -> queueTab.validateDiscount());
         return promoCode;
     }
 
     private JButton getApplyButton() {
-        JButton apply = new JButton("Apply");
+        JButton apply = new JButton("APPLY");
         apply.setFocusable(false);
-        apply.setPreferredSize(new Dimension(80, 32));
+        apply.setPreferredSize(new Dimension(100, 48));
+        apply.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
         apply.addActionListener(_ -> queueTab.validateDiscount());
         return apply;
     }

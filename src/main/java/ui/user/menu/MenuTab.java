@@ -1,7 +1,7 @@
 package ui.user.menu;
 
-import product.Allergy;
-import product.Product;
+import app.Allergy;
+import app.Product;
 import ui.card.Item;
 import ui.user.UserUi;
 
@@ -24,7 +24,7 @@ public class MenuTab extends JPanel{
 
     public MenuTab(UserUi userUi) {
         this.userUi = userUi;
-        this.setBackground(UserUi.MAIN_COLOR);
+        this.setOpaque(false);
         this.setBorder(UserUi.BORDER_STYLE);
         this.setPreferredSize(new Dimension(575, 1));
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -36,7 +36,7 @@ public class MenuTab extends JPanel{
 
     private JPanel getMenuContainer() {
         JPanel menuContainer = new JPanel();
-        menuContainer.setBackground(UserUi.MAIN_COLOR);
+        menuContainer.setOpaque(false);
         menuContainer.setPreferredSize(new Dimension(1000, 800));
         return menuContainer;
     }
