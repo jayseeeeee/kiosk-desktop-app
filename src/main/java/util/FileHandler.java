@@ -13,11 +13,13 @@ public class FileHandler {
     public final static File PROGRAM_FOLDER = new File(USER_DIRECTORY, "Documents\\My Shop");
     public final static File IMAGE_FOLDER = new File(PROGRAM_FOLDER + "\\Images");
     public final static File ASSETS_FOLDER = new File(PROGRAM_FOLDER + "\\Assets");
+    public final static File ORDER_FOLDER = new File(PROGRAM_FOLDER + "\\Orders");
 
     public static void setDirectories() {
         PROGRAM_FOLDER.mkdir();
         IMAGE_FOLDER.mkdir();
         ASSETS_FOLDER.mkdir();
+        ORDER_FOLDER.mkdir();
         createImageDirectory();
     }
 

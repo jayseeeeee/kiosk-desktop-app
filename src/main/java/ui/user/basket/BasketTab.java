@@ -9,9 +9,8 @@ import java.awt.*;
 import java.util.LinkedHashSet;
 
 public class BasketTab extends JPanel {
-    public final UserUi userUi;
-    public final LabelContainer labelContainer = new LabelContainer();
-    public final JPanel basketContainer = new JPanel();
+    private final UserUi userUi;
+    private final JPanel basketContainer = new JPanel();
 
     public final LinkedHashSet<Product> basketList = new LinkedHashSet<>();
 
@@ -21,8 +20,22 @@ public class BasketTab extends JPanel {
         this.setBorder(UserUi.BORDER_STYLE);
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setPreferredSize(new Dimension(1, 1));
-        this.add(labelContainer);
+        this.add(getBasketTitle());
+        this.add(Box.createHorizontalStrut(32));
+        this.add(getBasketDescription());
         this.add(getScrollPane());
+    }
+
+    private JLabel getBasketTitle() {
+        JLabel queueTitle = new JLabel("BASKET");
+        queueTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 36));
+        return queueTitle;
+    }
+
+    private JLabel getBasketDescription() {
+        JLabel orderNumber = new JLabel("EDIT ORDER");
+        orderNumber.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
+        return orderNumber;
     }
 
     private JScrollPane getScrollPane() {
@@ -46,8 +59,8 @@ public class BasketTab extends JPanel {
                 basketContainer.add(new Basket(product, userUi));
             }
         }
-        basketContainer.revalidate();
-        basketContainer.repaint();
+        userUi.revalidate();
+        userUi.repaint();
         userUi.queueTab.updateInitialCost();
     }
 

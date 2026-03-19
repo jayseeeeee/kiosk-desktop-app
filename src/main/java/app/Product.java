@@ -1,8 +1,9 @@
 package app;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Product {
+public class Product implements Serializable {
     public static ArrayList<Product> listOfProducts = new ArrayList<>();
 
     public String name;

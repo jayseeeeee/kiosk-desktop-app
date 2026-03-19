@@ -6,12 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CostContainer extends JPanel {
-    public final JLabel initialCost = getInitialCost();
-    public final JLabel discountTitle = getDiscountTitle();
-    public final JLabel discount = getDiscount();
-    public final JLabel finalCost = getFinalCost();
+    final JLabel initialCost = getInitialCost();
+    final JLabel discountTitle = getDiscountTitle();
+    final JLabel discount = getDiscount();
+    final JLabel finalCost = getFinalCost();
 
-    public CostContainer() {
+    CostContainer() {
         this.setPreferredSize(new Dimension(420, 120));
         this.setLayout(new FlowLayout(FlowLayout.LEADING));
         this.setOpaque(false);

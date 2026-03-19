@@ -9,7 +9,7 @@ import java.awt.*;
 public class AllergyContainer extends JPanel {
     private final MenuTab menuTab;
 
-    public AllergyContainer(MenuTab menuTab) {
+    AllergyContainer(MenuTab menuTab) {
         this.menuTab = menuTab;
         this.setOpaque(false);
         this.add(getAllergyTitle());
@@ -19,13 +19,13 @@ public class AllergyContainer extends JPanel {
         }
     }
 
-    public JLabel getAllergyTitle() {
+    private JLabel getAllergyTitle() {
         JLabel allergyTitle = new JLabel("FILTER FOOD ALLERGY");
         allergyTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
         return allergyTitle;
     }
 
-    public JCheckBox getAllergyCheckBox(String allergy) {
+    private JCheckBox getAllergyCheckBox(String allergy) {
         JCheckBox allergyCheckBox = new JCheckBox(allergy);
         allergyCheckBox.setFocusable(false);
         allergyCheckBox.setContentAreaFilled(false);

@@ -7,20 +7,17 @@ import ui.user.UserUi;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 
 public class MenuTab extends JPanel{
-    public final UserUi userUi;
-    public final FilterContainer filterContainer = new FilterContainer(this);
-    public final AllergyContainer allergyContainer = new AllergyContainer(this);
-    public final SelectionContainer selectionContainer = new SelectionContainer(this);
-    public final JPanel menuContainer = getMenuContainer();
+    private final UserUi userUi;
+    private final FilterContainer filterContainer = new FilterContainer(this);
+    private final AllergyContainer allergyContainer = new AllergyContainer(this);
+    private final SelectionContainer selectionContainer = new SelectionContainer(this);
+    private final JPanel menuContainer = getMenuContainer();
 
-    public final HashMap<String, JCheckBox> allergyFilterResult = new HashMap<>();
-    public final ArrayList<Product> menuList = new ArrayList<>();
+    private final HashMap<String, JCheckBox> allergyFilterResult = new HashMap<>();
+    private final ArrayList<Product> menuList = new ArrayList<>();
 
     public MenuTab(UserUi userUi) {
         this.userUi = userUi;
@@ -41,7 +38,7 @@ public class MenuTab extends JPanel{
         return menuContainer;
     }
 
-    public void updateAllergy(JCheckBox checkBox, String allergy) {
+    void updateAllergy(JCheckBox checkBox, String allergy) {
         if (checkBox.isSelected()) {
             allergyFilterResult.put(allergy, checkBox);
         } else {
@@ -50,7 +47,7 @@ public class MenuTab extends JPanel{
         updateMenuContainer();
     }
 
-    public boolean isAllergyMatch(Allergy allergy) {
+    private boolean isAllergyMatch(Allergy allergy) {
         for (String allergyFilter : allergyFilterResult.keySet()) {
             if (allergy == null) {
                 break;
@@ -91,13 +88,13 @@ public class MenuTab extends JPanel{
         if (menuList.isEmpty()) {
             showEmptyMenu();
         } else {
-            sortProductByName(menuList, 0, menuList.size() - 1);
+            menuList.sort(Comparator.comparing(p -> p.name));
             showMenu();
         }
         selectionContainer.setVisible(menuList.size() > 6);
     }
 
-    public void showEmptyMenu() {
+    private void showEmptyMenu() {
         menuContainer.removeAll();
         menuContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
         menuContainer.add(getEmptyResultTitle());
@@ -120,29 +117,6 @@ public class MenuTab extends JPanel{
         emptyResultTip.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
         emptyResultTip.setHorizontalAlignment(JLabel.CENTER);
         return emptyResultTip;
-    }
-
-    private static void sortProductByName(ArrayList<Product> list, int firstIndex, int lastIndex) {
-        if (firstIndex < lastIndex) {
-            int pivotIndex = partition(list, firstIndex, lastIndex);
-            sortProductByName(list, firstIndex, pivotIndex - 1);   // Left side
-            sortProductByName(list, pivotIndex + 1, lastIndex);  // Right side
-        }
-    }
-
-    private static int partition(ArrayList<Product> list, int firstIndex, int lastIndex) {
-        Product lastProduct = list.get(lastIndex);  // pivot = last element
-        int lowestIndex = firstIndex - 1;        // index of smaller element
-
-        for (int i = firstIndex; i < lastIndex; i++) {
-            if (list.get(i).name.compareTo(lastProduct.name) < 0) {
-                lowestIndex++;
-                Collections.swap(list, lowestIndex, i);
-            }
-        }
-
-        Collections.swap(list, ++lowestIndex, lastIndex);
-        return lowestIndex;
     }
 
     public void changeSelection() {

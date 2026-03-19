@@ -10,11 +10,11 @@ import java.util.Objects;
 public class FilterContainer extends JPanel {
     private final MenuTab menuTab;
 
-    public final JTextField searchField = getSearchField();
-    public final JButton searchButton = getSearchButton();
-    public final JComboBox<String> categories = getCategories();
+    final JTextField searchField = getSearchField();
+    final JButton searchButton = getSearchButton();
+    final JComboBox<String> categories = getCategories();
 
-    public FilterContainer(MenuTab menuTab) {
+    FilterContainer(MenuTab menuTab) {
         this.menuTab = menuTab;
         this.setOpaque(false);
         this.add(searchField);

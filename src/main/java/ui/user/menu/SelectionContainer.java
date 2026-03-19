@@ -7,9 +7,9 @@ import java.awt.*;
 
 public class SelectionContainer extends JPanel {
     private final MenuTab menuTab;
-    public final JButton prevButton = getPrevButton();
-    public final JTextField pageSelection = getPageSelection();
-    public final JButton nextButton = getNextButton();
+    final JButton prevButton = getPrevButton();
+    final JTextField pageSelection = getPageSelection();
+    final JButton nextButton = getNextButton();
 
     public SelectionContainer(MenuTab menuTab) {
         this.menuTab = menuTab;
@@ -41,5 +41,4 @@ public class SelectionContainer extends JPanel {
         nextButton.addActionListener(_ -> menuTab.nextSelection());
         return nextButton;
     }
-
 }

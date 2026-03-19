@@ -9,10 +9,10 @@ import java.io.File;
 
 public class PaymentContainer extends JPanel {
     private final QueueTab queueTab;
-    public final JComboBox<String> paymentMethod = getPaymentMethod();
-    public final JTextField promoCode = getPromoCode();
+    final JComboBox<String> paymentMethod = getPaymentMethod();
+    final JTextField promoCode = getPromoCode();
 
-    public PaymentContainer(QueueTab queueTab) {
+    PaymentContainer(QueueTab queueTab) {
         this.queueTab = queueTab;
         this.setPreferredSize(new Dimension(420, 200));
         this.setLayout(new FlowLayout(FlowLayout.LEADING));

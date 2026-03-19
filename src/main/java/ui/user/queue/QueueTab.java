@@ -4,16 +4,22 @@ import app.Discount;
 import app.Product;
 import app.Order;
 import ui.user.UserUi;
+import util.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class QueueTab extends JPanel {
-    public final UserUi userUi;
-    public final LabelContainer labelContainer = new LabelContainer();
-    public final CostContainer costContainer = new CostContainer();
-    public final PaymentContainer paymentContainer = new PaymentContainer(this);
+    private final UserUi userUi;
+
+    private final CostContainer costContainer = new CostContainer();
+    private final PaymentContainer paymentContainer = new PaymentContainer(this);
     private final JPanel queueContainer = new JPanel();
+
     private double initialCost;
     private double finalCost;
     private Discount discount;
@@ -24,11 +30,33 @@ public class QueueTab extends JPanel {
         this.setBorder(UserUi.BORDER_STYLE);
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setPreferredSize(new Dimension(1, 1));
-        this.add(labelContainer);
+        this.add(getQueueTitle());
+        this.add(Box.createHorizontalStrut(32));
+        this.add(getOrderNumber());
+        this.add(Box.createHorizontalStrut(16));
+        this.add(getStatusTitle());
         this.add(getScrollPane());
         this.add(paymentContainer);
         this.add(costContainer);
         this.add(getCheckoutButton());
+    }
+
+    private JLabel getQueueTitle() {
+        JLabel queueTitle = new JLabel("QUEUE");
+        queueTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 36));
+        return queueTitle;
+    }
+
+    private JLabel getOrderNumber() {
+        JLabel orderNumber = new JLabel("ORDER NUMBER");
+        orderNumber.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
+        return orderNumber;
+    }
+
+    private JLabel getStatusTitle() {
+        JLabel statusTitle = new JLabel("STATUS");
+        statusTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
+        return statusTitle;
     }
 
     private JScrollPane getScrollPane() {
@@ -48,6 +76,52 @@ public class QueueTab extends JPanel {
         return checkoutButton;
     }
 
+    public void updateQueue() {
+        queueContainer.removeAll();
+        File[] files = FileHandler.ORDER_FOLDER.listFiles();
+        if (files == null) {
+            return;
+        }
+        Arrays.sort(files, new Comparator<>() {
+            @Override
+            public int compare(File f1, File f2) {
+                // Extract numbers from filenames
+                int num1 = extractNumber(f1.getName());
+                int num2 = extractNumber(f2.getName());
+                return Integer.compare(num1, num2);
+            }
+
+            private int extractNumber(String name) {
+                try {
+                    // Remove non-digits, parse number
+                    String num = name.replaceAll("\\D+", "");
+                    return num.isEmpty() ? 0 : Integer.parseInt(num);
+                } catch (NumberFormatException e) {
+                    return 0;
+                }
+            }
+        });
+
+        for (File file : files){
+            try (
+                FileInputStream orderFile = new FileInputStream(file);
+                ObjectInputStream orderObject = new ObjectInputStream(orderFile)
+            ) {
+                Order order = (Order) orderObject.readObject();
+                queueContainer.add(order.getOrderLabel());
+                Order.currentOrderCount = Math.max(Order.currentOrderCount, order.orderCount);
+            } catch (RuntimeException e) {
+                IO.println("Error: Unexpected runtime error occurred.\n" + e);
+            } catch (FileNotFoundException e) {
+                IO.println("Error: File not found: Please check the file path or name.\n" + e);
+            } catch (IOException e) {
+                IO.println("Error: I/O error encountered while processing the file.\n" + e);
+            } catch (ClassNotFoundException e) {
+                IO.println("Error: Required class definition not found.\n" + e);
+            }
+        }
+    }
+
     public void updateInitialCost() {
         initialCost = 0.00;
         for (Product product : userUi.basketTab.basketList) {
@@ -57,7 +131,7 @@ public class QueueTab extends JPanel {
         updateFinalCost();
     }
 
-    public void updateFinalCost() {
+    private void updateFinalCost() {
         finalCost = initialCost;
         costContainer.discountTitle.setVisible(discount != null);
         costContainer.discount.setVisible(discount != null);
@@ -80,7 +154,7 @@ public class QueueTab extends JPanel {
         costContainer.finalCost.setText(String.format("₱%.2f", finalCost));
     }
 
-    public void validateDiscount() {
+    void validateDiscount() {
         discount = Discount.validate(paymentContainer.promoCode.getText().trim());
         if (discount == null && !paymentContainer.promoCode.getText().isBlank()) {
             userUi.setUi(UserUi.INVALID_VOUCHER_UI);
@@ -88,32 +162,32 @@ public class QueueTab extends JPanel {
         updateFinalCost();
     }
 
-    public void checkout(String paymentMethod) {
+    private void checkout(String paymentMethod) {
         if (userUi.basketTab.basketList.isEmpty()) {
             userUi.setUi(UserUi.EMPTY_BASKET_UI);
             return;
         }
-        Order order = new Order(finalCost, userUi.basketTab.basketList);
+
         if (paymentMethod.equals("Cashless")) {
             userUi.setUi(UserUi.QR_CODE_UI);
+            new Order(finalCost, userUi.basketTab.basketList, "Cashless");
+        } else if (paymentMethod.equals("Pay on Counter")) {
+            new Order(finalCost, userUi.basketTab.basketList, "Pay on Counter");
+        } else {
+            return;
         }
+
         for (Product product : userUi.basketTab.basketList) {
             product.quantity = 0;
         }
-        userUi.basketTab.basketList.clear();
+
         if (discount != null) {
             discount.apply();
             discount = null;
             paymentContainer.promoCode.setText("");
         }
-
-        queueContainer.add(order);
-        queueContainer.revalidate();
-        queueContainer.repaint();
-
-        userUi.basketTab.basketContainer.removeAll();
-        userUi.basketTab.basketContainer.revalidate();
-        userUi.basketTab.basketContainer.repaint();
-        updateInitialCost();
+        updateQueue();
+        userUi.basketTab.basketList.clear();
+        userUi.basketTab.updateBasket();
     }
 }
