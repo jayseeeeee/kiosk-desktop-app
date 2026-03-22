@@ -1,12 +1,13 @@
 package app;
 
+import ui.admin.AdminUi;
 import ui.user.UserUi;
 import util.CSVParser;
 import util.FileHandler;
 
 import javax.swing.*;
 
-public class Main {
+public final class Main {
     static void main() {
 
         FileHandler.setDirectories();
@@ -20,5 +21,7 @@ public class Main {
 
         UserUi userUi = new UserUi();
         userUi.setUi(UserUi.MAIN_MENU_UI);
+        AdminUi adminUi = new AdminUi();
+        adminUi.setUi(AdminUi.ORDER_MENU_UI);
     }
 }

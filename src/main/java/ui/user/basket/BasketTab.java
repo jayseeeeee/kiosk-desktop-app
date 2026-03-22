@@ -1,14 +1,14 @@
 package ui.user.basket;
 
 import app.Product;
-import ui.card.Basket;
+import ui.user.card.BasketCard;
 import ui.user.UserUi;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedHashSet;
 
-public class BasketTab extends JPanel {
+public final class BasketTab extends JPanel {
     private final UserUi userUi;
     private final JPanel basketContainer = new JPanel();
 
@@ -21,7 +21,7 @@ public class BasketTab extends JPanel {
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setPreferredSize(new Dimension(1, 1));
         this.add(getBasketTitle());
-        this.add(Box.createHorizontalStrut(32));
+        this.add(Box.createHorizontalStrut(128));
         this.add(getBasketDescription());
         this.add(getScrollPane());
     }
@@ -56,12 +56,12 @@ public class BasketTab extends JPanel {
         } else {
             basketContainer.setLayout(new BoxLayout(basketContainer, BoxLayout.Y_AXIS));
             for (Product product : basketList) {
-                basketContainer.add(new Basket(product, userUi));
+                basketContainer.add(new BasketCard(product, userUi));
             }
         }
+        userUi.queueTab.updateInitialCost();
         userUi.revalidate();
         userUi.repaint();
-        userUi.queueTab.updateInitialCost();
     }
 
     public void addBasket(Product product) {

@@ -6,7 +6,7 @@ import app.Allergy;
 import javax.swing.*;
 import java.awt.*;
 
-public class AllergyContainer extends JPanel {
+public final class AllergyContainer extends JPanel {
     private final MenuTab menuTab;
 
     AllergyContainer(MenuTab menuTab) {

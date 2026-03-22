@@ -1,4 +1,4 @@
-package ui.card;
+package ui.user.card;
 
 import ui.user.UserUi;
 import app.Product;
@@ -6,25 +6,24 @@ import util.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
-public abstract class Card extends JPanel {
+abstract class Card extends JPanel {
     JLabel cardImage;
     JLabel cardTitle;
     JPanel textContainer;
-    Product product;
 
-    Card(Product product, int imageWidth, int imageHeight, int textContainerWidth, int textContainerHeight) {
-        this.product = product;
+    Card(String title, ImageIcon imageIcon, Dimension textDimension) {
         this.setBackground(Color.white);
         this.setBorder(UserUi.BORDER_STYLE);
 
-        cardImage = new JLabel(FileHandler.scaleImage(FileHandler.IMAGE_FOLDER, product.imagePath, imageHeight, imageWidth));
-        cardTitle = new JLabel(product.name);
+        cardImage = new JLabel(imageIcon);
+        cardTitle = new JLabel(title);
         cardTitle.setFont(new Font("Helvetica", Font.BOLD, 18));
 
         textContainer = new JPanel(new FlowLayout(FlowLayout.LEADING));
         textContainer.setOpaque(false);
-        textContainer.setPreferredSize(new Dimension(textContainerWidth, textContainerHeight));
+        textContainer.setPreferredSize(textDimension);
         textContainer.setLayout(new BoxLayout(textContainer, BoxLayout.Y_AXIS));
         textContainer.add(cardTitle);
 

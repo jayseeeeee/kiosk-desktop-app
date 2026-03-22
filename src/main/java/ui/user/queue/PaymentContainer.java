@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public class PaymentContainer extends JPanel {
+public final class PaymentContainer extends JPanel {
     private final QueueTab queueTab;
     final JComboBox<String> paymentMethod = getPaymentMethod();
     final JTextField promoCode = getPromoCode();

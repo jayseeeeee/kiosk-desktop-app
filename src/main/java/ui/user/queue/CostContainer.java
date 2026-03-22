@@ -5,7 +5,7 @@ import ui.user.UserUi;
 import javax.swing.*;
 import java.awt.*;
 
-public class CostContainer extends JPanel {
+public final class CostContainer extends JPanel {
     final JLabel initialCost = getInitialCost();
     final JLabel discountTitle = getDiscountTitle();
     final JLabel discount = getDiscount();
@@ -49,7 +49,7 @@ public class CostContainer extends JPanel {
     }
 
     private JLabel getDiscountTitle() {
-        JLabel discountTitle = new JLabel("DISCOUNT");;
+        JLabel discountTitle = new JLabel("DISCOUNT");
         discountTitle.setFont(new Font(UserUi.FONT, Font.ITALIC, 16));
         discountTitle.setVisible(false);
         return discountTitle;

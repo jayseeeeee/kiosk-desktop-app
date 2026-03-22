@@ -5,9 +5,8 @@ import util.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 
-public class FilterContainer extends JPanel {
+public final class FilterContainer extends JPanel {
     private final MenuTab menuTab;
 
     final JTextField searchField = getSearchField();

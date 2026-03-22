@@ -41,21 +41,25 @@ public class FileHandler {
     public static ImageIcon scaleImage(File location, String name, int targetHeight) {
         ImageIcon image = new ImageIcon(location + "\\" + name);
         float scaleRatio = (float) targetHeight / image.getIconHeight();
-        return new ImageIcon(
+        return (isImageValid(image)) ? new ImageIcon(
                 image.getImage().getScaledInstance(
                         (int) (image.getIconWidth() * scaleRatio),
                         (int) (image.getIconHeight() * scaleRatio),
                         Image.SCALE_SMOOTH)
-        );
+        ) : null;
     }
 
     public static ImageIcon scaleImage(File location, String name, int targetHeight, int targetWidth) {
         ImageIcon image = new ImageIcon(location + "\\" + name);
-        return new ImageIcon(
+        return (isImageValid(image)) ? new ImageIcon(
                 image.getImage().getScaledInstance(
                         targetWidth,
                         targetHeight,
                         Image.SCALE_SMOOTH)
-        );
+        ) : null;
+    }
+
+    private static boolean isImageValid(ImageIcon image) {
+        return (image.getIconWidth() > 1 && image.getIconHeight() > 1);
     }
 }

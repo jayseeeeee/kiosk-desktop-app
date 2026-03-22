@@ -5,7 +5,7 @@ import ui.user.UserUi;
 import javax.swing.*;
 import java.awt.*;
 
-public class SelectionContainer extends JPanel {
+public final class SelectionContainer extends JPanel {
     private final MenuTab menuTab;
     final JButton prevButton = getPrevButton();
     final JTextField pageSelection = getPageSelection();

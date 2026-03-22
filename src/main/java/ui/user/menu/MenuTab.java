@@ -2,14 +2,14 @@ package ui.user.menu;
 
 import app.Allergy;
 import app.Product;
-import ui.card.Item;
+import ui.user.card.MenuCard;
 import ui.user.UserUi;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
-public class MenuTab extends JPanel{
+public final class MenuTab extends JPanel{
     private final UserUi userUi;
     private final FilterContainer filterContainer = new FilterContainer(this);
     private final AllergyContainer allergyContainer = new AllergyContainer(this);
@@ -64,7 +64,7 @@ public class MenuTab extends JPanel{
         int currentPage = Integer.parseInt(selectionContainer.pageSelection.getText()) - 1;
         int currentItem = currentPage * 6;
         for (int i = currentItem; i < (Math.min(currentItem + 6, (menuList.size()))); i++) {
-            menuContainer.add(new Item(menuList.get(i), userUi));
+            menuContainer.add(new MenuCard(menuList.get(i), userUi));
         }
         menuContainer.revalidate();
         menuContainer.repaint();
@@ -76,7 +76,7 @@ public class MenuTab extends JPanel{
         String selectedCategory = (String) filterContainer.categories.getSelectedItem();
         String searchText = filterContainer.searchField.getText().trim();
         System.out.println(selectedCategory);
-        for (Product product : Product.listOfProducts) {
+        for (Product product : Product.getListOfProducts()) {
             boolean categoryMatch = product.category.equals(selectedCategory) || Objects.equals(selectedCategory, "Show All");
             boolean searchMatch = product.name.toLowerCase().contains(searchText.toLowerCase()) || searchText.isBlank();
             boolean allergyMatch = isAllergyMatch(product.allergies);

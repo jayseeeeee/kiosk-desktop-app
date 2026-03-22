@@ -1,5 +1,9 @@
 package ui.admin.order;
 
-public class OrderTab {
+import javax.swing.*;
 
+public final class OrderTab extends JPanel {
+    public OrderTab() {
+
+    }
 }

@@ -4,16 +4,13 @@ import app.Discount;
 import app.Product;
 import app.Order;
 import ui.user.UserUi;
-import util.FileHandler;
+import ui.user.card.QueueCard;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Comparator;
 
-public class QueueTab extends JPanel {
+public final class QueueTab extends JPanel {
     private final UserUi userUi;
 
     private final CostContainer costContainer = new CostContainer();
@@ -78,48 +75,13 @@ public class QueueTab extends JPanel {
 
     public void updateQueue() {
         queueContainer.removeAll();
-        File[] files = FileHandler.ORDER_FOLDER.listFiles();
-        if (files == null) {
-            return;
-        }
-        Arrays.sort(files, new Comparator<>() {
-            @Override
-            public int compare(File f1, File f2) {
-                // Extract numbers from filenames
-                int num1 = extractNumber(f1.getName());
-                int num2 = extractNumber(f2.getName());
-                return Integer.compare(num1, num2);
-            }
 
-            private int extractNumber(String name) {
-                try {
-                    // Remove non-digits, parse number
-                    String num = name.replaceAll("\\D+", "");
-                    return num.isEmpty() ? 0 : Integer.parseInt(num);
-                } catch (NumberFormatException e) {
-                    return 0;
-                }
-            }
-        });
-
-        for (File file : files){
-            try (
-                FileInputStream orderFile = new FileInputStream(file);
-                ObjectInputStream orderObject = new ObjectInputStream(orderFile)
-            ) {
-                Order order = (Order) orderObject.readObject();
-                queueContainer.add(order.getOrderLabel());
-                Order.currentOrderCount = Math.max(Order.currentOrderCount, order.orderCount);
-            } catch (RuntimeException e) {
-                IO.println("Error: Unexpected runtime error occurred.\n" + e);
-            } catch (FileNotFoundException e) {
-                IO.println("Error: File not found: Please check the file path or name.\n" + e);
-            } catch (IOException e) {
-                IO.println("Error: I/O error encountered while processing the file.\n" + e);
-            } catch (ClassNotFoundException e) {
-                IO.println("Error: Required class definition not found.\n" + e);
-            }
+        for (Order order : Order.getListOfOrders()){
+            queueContainer.add(new QueueCard(order));
         }
+
+        userUi.revalidate();
+        userUi.repaint();
     }
 
     public void updateInitialCost() {
@@ -168,12 +130,17 @@ public class QueueTab extends JPanel {
             return;
         }
 
+        Order order;
         if (paymentMethod.equals("Cashless")) {
             userUi.setUi(UserUi.QR_CODE_UI);
-            new Order(finalCost, userUi.basketTab.basketList, "Cashless");
+            order = Order.createNewOrder(finalCost, userUi.basketTab.basketList, "Cashless");
         } else if (paymentMethod.equals("Pay on Counter")) {
-            new Order(finalCost, userUi.basketTab.basketList, "Pay on Counter");
+            order = Order.createNewOrder(finalCost, userUi.basketTab.basketList, "Pay on Counter");
         } else {
+            return;
+        }
+
+        if (order == null) {
             return;
         }
 
@@ -186,8 +153,9 @@ public class QueueTab extends JPanel {
             discount = null;
             paymentContainer.promoCode.setText("");
         }
-        updateQueue();
+
         userUi.basketTab.basketList.clear();
         userUi.basketTab.updateBasket();
+        updateQueue();
     }
 }

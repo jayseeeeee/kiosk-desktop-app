@@ -6,22 +6,28 @@ import util.FileHandler;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 
-public class Order implements Serializable {
-    public static final int PAYMENT = 0;
-    public static final int PREPARING = 1;
-    public static final int SERVING = 2;
+public final class Order implements Serializable {
+    private static final ArrayList<Order> listOfOrders = new ArrayList<>();
 
-    public static final int MAX_ORDER_COUNT = 999;
-    public static int currentOrderCount = 0;
+    public static final int PAYMENT_STATUS = 0;
+    public static final int PREPARING_STATUS = 1;
+    public static final int SERVING_STATUS = 2;
+
+    private static final int MAX_ORDER_COUNT = 999;
+    private static int currentOrderCount = 0;
+
     public final int orderCount;
+    public final double finalCost;
+    private int status;
     private final LinkedHashSet<Product> products;
-    private final double finalCost;
-    private final int status;
 
-    public Order(double finalCost, LinkedHashSet<Product> products, String paymentMethod) {
-        this.status = PAYMENT;
+    private Order(double finalCost, LinkedHashSet<Product> products, String paymentMethod) {
+        setStatus(PAYMENT_STATUS);
         this.finalCost = finalCost;
         this.products = products;
         orderCount = ++currentOrderCount;
@@ -39,28 +45,69 @@ public class Order implements Serializable {
         }
     }
 
-    public JLabel getOrderLabel() {
-        JLabel orderLabel = new JLabel();
-        orderLabel.setLayout(new FlowLayout(FlowLayout.TRAILING));
-        orderLabel.setBackground(Color.white);
-        orderLabel.setBorder(UserUi.BORDER_STYLE);
-        orderLabel.setPreferredSize(new Dimension(420, 96));
-        orderLabel.setMaximumSize(new Dimension(420, 96));
+    public int getStatus() {
+        return status;
+    }
 
-        orderLabel.setText(String.format("%03d", orderCount));
-        orderLabel.setFont(new Font(UserUi.FONT, Font.BOLD, 32));
-
-        ImageIcon statusIcon = null;
+    public void setStatus(int status) {
         switch (status) {
-            case PAYMENT -> statusIcon = FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "payment_status.png", 48);
-            case PREPARING -> statusIcon = FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "preparing_status.png", 48);
-            case SERVING -> statusIcon = FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "serving_status.png", 48);
+            case PREPARING_STATUS, SERVING_STATUS -> this.status = status;
+            default -> this.status = PAYMENT_STATUS;
         }
-        orderLabel.setIcon(statusIcon);
-        orderLabel.setHorizontalAlignment(JLabel.CENTER);
-        orderLabel.setVerticalAlignment(JLabel.CENTER);
-        orderLabel.setHorizontalTextPosition(JLabel.LEFT);
-        orderLabel.setIconTextGap(75);
-        return orderLabel;
+    }
+
+    public static Order createNewOrder(double finalCost, LinkedHashSet<Product> products, String paymentMethod) {
+        if (currentOrderCount >= MAX_ORDER_COUNT) {
+            return null;
+        } else {
+            return new Order(finalCost, products, paymentMethod);
+        }
+    }
+
+    public static Order[] getListOfOrders() {
+        listOfOrders.clear();
+        File[] files = FileHandler.ORDER_FOLDER.listFiles();
+        if (files == null) {
+            return new Order[0];
+        }
+        Arrays.sort(files, new Comparator<>() {
+            @Override
+            public int compare(File f1, File f2) {
+                // Extract numbers from filenames
+                int num1 = extractNumber(f1.getName());
+                int num2 = extractNumber(f2.getName());
+                return Integer.compare(num1, num2);
+            }
+
+            private int extractNumber(String name) {
+                try {
+                    // Remove non-digits, parse number
+                    String num = name.replaceAll("\\D+", "");
+                    return num.isEmpty() ? 0 : Integer.parseInt(num);
+                } catch (NumberFormatException e) {
+                    return 0;
+                }
+            }
+        });
+
+        for (File file : files) {
+            try (
+                FileInputStream orderFile = new FileInputStream(file);
+                ObjectInputStream orderObject = new ObjectInputStream(orderFile)
+            ) {
+                Order order = (Order) orderObject.readObject();
+                currentOrderCount = Math.max(Order.currentOrderCount, order.orderCount);
+                listOfOrders.add(order);
+            } catch (RuntimeException e) {
+                IO.println("Error: Unexpected runtime error occurred.\n" + e);
+            } catch (FileNotFoundException e) {
+                IO.println("Error: File not found: Please check the file path or name.\n" + e);
+            } catch (IOException e) {
+                IO.println("Error: I/O error encountered while processing the file.\n" + e);
+            } catch (ClassNotFoundException e) {
+                IO.println("Error: Required class definition not found.\n" + e);
+            }
+        }
+        return listOfOrders.toArray(new Order[0]);
     }
 }

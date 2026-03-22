@@ -1,11 +1,10 @@
 package app;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class Allergy implements Serializable {
+public final class Allergy {
     public static HashSet<String> listOfAllergies = new HashSet<>();
     public ArrayList<String> productAllergies = new ArrayList<>();
 

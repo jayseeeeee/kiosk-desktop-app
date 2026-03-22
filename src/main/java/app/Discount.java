@@ -2,7 +2,7 @@ package app;
 
 import java.util.HashMap;
 
-public class Discount {
+public final class Discount {
     final private static HashMap<String, Discount> listOfPromoCodes = new HashMap<>();
     final private String voucherCode;
     public final double discountCost;
