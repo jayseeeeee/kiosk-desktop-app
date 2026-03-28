@@ -19,9 +19,7 @@ public final class Main {
             IO.println(e);
         }
 
-        UserUi userUi = new UserUi();
-        userUi.setUi(UserUi.MAIN_MENU_UI);
-        AdminUi adminUi = new AdminUi();
-        adminUi.setUi(AdminUi.ORDER_MENU_UI);
+        new UserUi();
+        new AdminUi();
     }
 }

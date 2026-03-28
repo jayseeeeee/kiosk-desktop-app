@@ -1,17 +1,42 @@
 package ui.admin;
 
 import ui.FrameUi;
+import ui.admin.analytics.AnalyticsTab;
+import ui.admin.dashboard.DashboardTab;
+import ui.admin.history.HistoryTab;
+import ui.admin.orders.OrdersTab;
+import ui.admin.settings.SettingsTab;
 import ui.user.UserUi;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Set;
 
 public final class AdminUi extends FrameUi {
     public final static int ORDER_MENU_UI = 0;
 
     public final JPanel navigationContainer = getNavigationContainer();
     private final JScrollPane navigationPane = getNavigationPane();
-    public final JPanel tabContainer = getTabContainer();
+
+    private final DashboardTab dashboardTab = new DashboardTab(this);
+    private final OrdersTab ordersTab = new OrdersTab(this);
+    private final HistoryTab historyTab = new HistoryTab(this);
+    private final AnalyticsTab analyticsTab = new AnalyticsTab(this);
+    private final SettingsTab settingsTab = new SettingsTab(this);
+
+    public final Tab[] listOfTabs = {
+        new Tab(this, "DASHBOARD", "dashboard.png", "dashboard_selected.png"),
+        new Tab(this, "ORDERS", "orders.png", "orders_selected.png"),
+        new Tab(this, "HISTORY", "history.png", "history_selected.png"),
+        new Tab(this, "ANALYTICS", "analytics.png", "analytics_selected.png"),
+        new Tab(this, "SETTINGS", "settings.png", "settings_selected.png")
+    };
+
+    private TabContainer tabContainer;
+
+    public AdminUi() {
+        listOfTabs[1].tabButton.doClick();
+    }
 
     @Override
     public void setUi(int ui) {
@@ -24,14 +49,23 @@ public final class AdminUi extends FrameUi {
         this.mainPanel.repaint();
     }
 
+    public void setTabContainer(Tab tab) {
+        switch (tab.title) {
+            case "DASHBOARD" -> tabContainer = dashboardTab;
+            case "ORDERS" -> tabContainer = ordersTab;
+            case "HISTORY" -> tabContainer = historyTab;
+            case "ANALYTICS" -> tabContainer = analyticsTab;
+            case "SETTINGS" -> tabContainer = settingsTab;
+        }
+    }
+
     private void setOrderMenuUi() {
         this.mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+        navigationContainer.removeAll();
         navigationContainer.add(Box.createVerticalStrut(128));
-        navigationContainer.add(new Tab(this, "DASHBOARD", "dashboard.png", "dashboard_selected.png"));
-        navigationContainer.add(new Tab(this, "ORDERS", "orders.png", "orders_selected.png"));
-        navigationContainer.add(new Tab(this, "HISTORY", "history.png", "history_selected.png"));
-        navigationContainer.add(new Tab(this, "ANALYTICS", "analytics.png", "analytics_selected.png"));
-        navigationContainer.add(new Tab(this, "SETTINGS", "settings.png", "settings_selected.png"));
+        for (Tab tab : listOfTabs) {
+            navigationContainer.add(tab);
+        }
         this.mainPanel.add(navigationPane);
         this.mainPanel.add(tabContainer);
     }
@@ -46,17 +80,9 @@ public final class AdminUi extends FrameUi {
     private JScrollPane getNavigationPane() {
         JScrollPane navigationPane = new JScrollPane(navigationContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         navigationPane.setOpaque(false);
+        navigationPane.setPreferredSize(new Dimension(1, 1));
         navigationPane.getViewport().setOpaque(false);
         navigationPane.setBorder(UserUi.BORDER_STYLE);
         return navigationPane;
-    }
-
-    private JPanel getTabContainer() {
-        JPanel tabContainer = new JPanel();
-        tabContainer.setOpaque(false);
-        tabContainer.setBorder(UserUi.BORDER_STYLE);
-        tabContainer.setPreferredSize(new Dimension(1600, 1));
-        tabContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        return tabContainer;
     }
 }

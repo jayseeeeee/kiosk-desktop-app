@@ -8,20 +8,14 @@ import java.awt.*;
 import java.util.ArrayList;
 
 final class Tab extends JPanel {
-    public final static Color DEFAULT_COLOR = new Color(0x686868);
-    public final static Color SELECTED_COLOR = new Color(0x88584e);
-
-    private final static ArrayList<Tab> tabs = new ArrayList<>();
-
-    private final String title;
+    public final String title;
     private final String imageName;
     private final String selectedImageName;
 
     private final JLabel tabIcon;
     private final JLabel tabTitle;
-    private final JButton tabButton;
+    final JButton tabButton;
     private final AdminUi adminUi;
-
 
     Tab(AdminUi adminUi, String title, String imageName, String selectedImageName) {
         this.adminUi = adminUi;
@@ -40,11 +34,6 @@ final class Tab extends JPanel {
         tabButton.add(Box.createHorizontalStrut(24));
         tabButton.add(tabTitle);
 
-        if (tabs.isEmpty()) {
-            tabButton.doClick();
-        }
-        tabs.add(this);
-
         this.add(Box.createRigidArea(new Dimension(64, 86)));
         this.add(tabButton);
     }
@@ -55,7 +44,7 @@ final class Tab extends JPanel {
 
     private JLabel getTabTitle() {
         JLabel tabTitle = new JLabel(title);
-        tabTitle.setForeground(DEFAULT_COLOR);
+        tabTitle.setForeground(AdminUi.DEFAULT_COLOR);
         tabTitle.setFont(new Font(AdminUi.FONT, Font.BOLD, 24));
         return tabTitle;
     }
@@ -67,15 +56,15 @@ final class Tab extends JPanel {
         tabButton.setLayout(new FlowLayout());
         tabButton.addActionListener(_ -> {
             tabIcon.setIcon(FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, selectedImageName, 48, 48));
-            tabTitle.setForeground(SELECTED_COLOR);
-            for (Tab tab : tabs) {
+            tabTitle.setForeground(AdminUi.SELECTED_COLOR);
+            for (Tab tab : adminUi.listOfTabs) {
                 if (tab != this) {
                     tab.tabIcon.setIcon(FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, tab.imageName, 48, 48));
-                    tab.tabTitle.setForeground(DEFAULT_COLOR);
+                    tab.tabTitle.setForeground(AdminUi.DEFAULT_COLOR);
                 }
             }
-            adminUi.repaint();
-            adminUi.revalidate();
+            adminUi.setTabContainer(this);
+            adminUi.setUi(AdminUi.ORDER_MENU_UI);
         });
         return tabButton;
     }

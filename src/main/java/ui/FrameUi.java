@@ -13,6 +13,8 @@ public abstract class FrameUi extends JFrame {
     private final static int LOGO_HEIGHT = 128;
     public final static LineBorder BORDER_STYLE = new LineBorder(new Color(0xFFCFCFCF, true), 1, true);
     public final static Color MAIN_COLOR = new Color(0xFAFAFA);
+    public final static Color DEFAULT_COLOR = new Color(0x686868);
+    public final static Color SELECTED_COLOR = new Color(0x88584e);
     public final static String FONT = "Helvetica";
 
     public final JPanel mainPanel = getMainPanel();
@@ -26,6 +28,7 @@ public abstract class FrameUi extends JFrame {
         this.setUndecorated(true);
         this.setAlwaysOnTop(true);
         this.getContentPane().setBackground(MAIN_COLOR);
+//        this.getContentPane().setBackground(Color.PINK);
         this.setExtendedState(Frame.MAXIMIZED_BOTH);
         this.add(getLogo(), BorderLayout.NORTH);
         this.add(mainPanel);

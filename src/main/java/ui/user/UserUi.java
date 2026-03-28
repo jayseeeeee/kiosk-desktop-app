@@ -20,6 +20,10 @@ public final class UserUi extends FrameUi {
     public final MenuTab menuTab = new MenuTab(this);
     public final QueueTab queueTab = new QueueTab(this);
 
+    public UserUi() {
+        setUi(MAIN_MENU_UI);
+    }
+
     @Override
     public void setUi(int ui) {
         this.mainPanel.removeAll();
