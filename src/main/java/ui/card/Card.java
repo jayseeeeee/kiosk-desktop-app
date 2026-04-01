@@ -1,12 +1,9 @@
-package ui.user.card;
+package ui.card;
 
 import ui.user.UserUi;
-import app.Product;
-import util.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 abstract class Card extends JPanel {
     JLabel cardImage;

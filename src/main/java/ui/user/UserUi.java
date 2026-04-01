@@ -1,6 +1,9 @@
 package ui.user;
 
+import app.Main;
 import ui.FrameUi;
+import ui.Server;
+import ui.admin.AdminUi;
 import ui.user.basket.BasketTab;
 import ui.user.menu.MenuTab;
 import ui.user.queue.QueueTab;
@@ -16,11 +19,13 @@ public final class UserUi extends FrameUi {
     public final static int QR_CODE_UI = 2;
     public final static int INVALID_VOUCHER_UI = 3;
 
+    public final Server server;
     public final BasketTab basketTab = new BasketTab(this);
     public final MenuTab menuTab = new MenuTab(this);
     public final QueueTab queueTab = new QueueTab(this);
 
-    public UserUi() {
+    public UserUi(Server server) {
+        this.server = server;
         setUi(MAIN_MENU_UI);
     }
 

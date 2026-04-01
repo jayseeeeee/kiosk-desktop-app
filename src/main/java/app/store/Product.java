@@ -1,4 +1,4 @@
-package app;
+package app.store;
 
 import java.io.Serializable;
 import java.util.ArrayList;

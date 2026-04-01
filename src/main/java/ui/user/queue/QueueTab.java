@@ -1,14 +1,13 @@
 package ui.user.queue;
 
-import app.Discount;
-import app.Product;
-import app.Order;
+import app.store.Discount;
+import app.store.Product;
+import app.store.Order;
 import ui.user.UserUi;
-import ui.user.card.QueueCard;
+import ui.card.QueueCard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
 
 public final class QueueTab extends JPanel {
     private final UserUi userUi;
@@ -82,6 +81,7 @@ public final class QueueTab extends JPanel {
 
         userUi.revalidate();
         userUi.repaint();
+        userUi.server.updateOrder();
     }
 
     public void updateInitialCost() {

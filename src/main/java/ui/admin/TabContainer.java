@@ -6,18 +6,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public abstract class TabContainer extends JPanel {
-    private final AdminUi adminUi;
+    protected final AdminUi adminUi;
 
     protected TabContainer(AdminUi adminUi) {
         this.adminUi = adminUi;
         this.setOpaque(false);
         this.setBorder(UserUi.BORDER_STYLE);
         this.setPreferredSize(new Dimension(1000, 1));
-        this.setLayout(new FlowLayout());
+        this.setLayout(new FlowLayout(FlowLayout.LEADING));
         setContainerLayout();
     }
 
     public void setContainerLayout() {
+        this.setLayout(new FlowLayout());
         this.add(getEmptyResultTitle());
         this.add(getEmptyResultTip());
     }

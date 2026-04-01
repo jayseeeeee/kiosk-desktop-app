@@ -1,8 +1,8 @@
 package ui.user.menu;
 
-import app.Allergy;
-import app.Product;
-import ui.user.card.MenuCard;
+import app.store.Allergy;
+import app.store.Product;
+import ui.card.MenuCard;
 import ui.user.UserUi;
 
 import javax.swing.*;

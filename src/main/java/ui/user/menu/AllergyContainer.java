@@ -1,7 +1,7 @@
 package ui.user.menu;
 
 import ui.user.UserUi;
-import app.Allergy;
+import app.store.Allergy;
 
 import javax.swing.*;
 import java.awt.*;

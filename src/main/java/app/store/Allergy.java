@@ -1,4 +1,4 @@
-package app;
+package app.store;
 
 import java.util.ArrayList;
 import java.util.HashSet;

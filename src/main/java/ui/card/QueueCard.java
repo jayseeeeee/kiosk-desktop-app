@@ -1,6 +1,6 @@
-package ui.user.card;
+package ui.card;
 
-import app.Order;
+import app.store.Order;
 import ui.user.UserUi;
 import util.FileHandler;
 
@@ -25,5 +25,4 @@ public class QueueCard extends Card {
         this.add(textContainer);
         this.add(cardImage);
     }
-
 }

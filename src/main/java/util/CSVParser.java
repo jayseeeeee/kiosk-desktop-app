@@ -1,8 +1,8 @@
 package util;
 
-import app.Discount;
-import app.Allergy;
-import app.Product;
+import app.store.Discount;
+import app.store.Allergy;
+import app.store.Product;
 
 import javax.swing.*;
 import java.io.*;

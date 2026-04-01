@@ -1,46 +1,39 @@
 package ui.admin.orders;
 
+import app.store.Order;
 import ui.admin.AdminUi;
 import ui.admin.TabContainer;
-import ui.user.UserUi;
+import ui.card.OrderCard;
 
 import javax.swing.*;
-import java.awt.*;
 
 public final class OrdersTab extends TabContainer {
-    private final JPanel queueContainer = new JPanel();
+    private final ListContainer listContainer = new ListContainer(this);
+    private final ViewContainer viewContainer = new ViewContainer(this);
 
     public OrdersTab(AdminUi adminUi) {
         super(adminUi);
+        this.add(listContainer);
+        this.add(viewContainer);
     }
 
     @Override
     public void setContainerLayout() {
-
+        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
     }
 
-    private JLabel getQueueTitle() {
-        JLabel queueTitle = new JLabel("QUEUE");
-        queueTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 36));
-        return queueTitle;
+    public void updateQueue() {
+        listContainer.orderContainer.removeAll();
+
+        for (Order order : Order.getListOfOrders()){
+            listContainer.orderContainer.add(new OrderCard(order, this));
+        }
+
+        this.adminUi.revalidate();
+        this.adminUi.repaint();
     }
 
-    private JLabel getOrderNumber() {
-        JLabel orderNumber = new JLabel("ORDER NUMBER");
-        orderNumber.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
-        return orderNumber;
-    }
+    public void updateListContainer(Order order) {
 
-    private JLabel getStatusTitle() {
-        JLabel statusTitle = new JLabel("STATUS");
-        statusTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
-        return statusTitle;
-    }
-
-    private JScrollPane getScrollPane() {
-        queueContainer.setLayout(new BoxLayout(queueContainer, BoxLayout.Y_AXIS));
-        JScrollPane scrollPane = new JScrollPane(queueContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setPreferredSize(new Dimension(420, 440));
-        return scrollPane;
     }
 }

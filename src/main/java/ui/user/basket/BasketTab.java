@@ -1,7 +1,7 @@
 package ui.user.basket;
 
-import app.Product;
-import ui.user.card.BasketCard;
+import app.store.Product;
+import ui.card.BasketCard;
 import ui.user.UserUi;
 
 import javax.swing.*;

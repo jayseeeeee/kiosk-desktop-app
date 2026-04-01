@@ -1,6 +1,7 @@
 package ui.admin;
 
 import ui.FrameUi;
+import ui.Server;
 import ui.admin.analytics.AnalyticsTab;
 import ui.admin.dashboard.DashboardTab;
 import ui.admin.history.HistoryTab;
@@ -10,21 +11,20 @@ import ui.user.UserUi;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Set;
 
 public final class AdminUi extends FrameUi {
     public final static int ORDER_MENU_UI = 0;
 
-    public final JPanel navigationContainer = getNavigationContainer();
+    private final JPanel navigationContainer = getNavigationContainer();
     private final JScrollPane navigationPane = getNavigationPane();
 
-    private final DashboardTab dashboardTab = new DashboardTab(this);
-    private final OrdersTab ordersTab = new OrdersTab(this);
-    private final HistoryTab historyTab = new HistoryTab(this);
-    private final AnalyticsTab analyticsTab = new AnalyticsTab(this);
-    private final SettingsTab settingsTab = new SettingsTab(this);
+    public final DashboardTab dashboardTab = new DashboardTab(this);
+    public final OrdersTab ordersTab = new OrdersTab(this);
+    public final HistoryTab historyTab = new HistoryTab(this);
+    public final AnalyticsTab analyticsTab = new AnalyticsTab(this);
+    public final SettingsTab settingsTab = new SettingsTab(this);
 
-    public final Tab[] listOfTabs = {
+    final Tab[] listOfTabs = {
         new Tab(this, "DASHBOARD", "dashboard.png", "dashboard_selected.png"),
         new Tab(this, "ORDERS", "orders.png", "orders_selected.png"),
         new Tab(this, "HISTORY", "history.png", "history_selected.png"),
@@ -33,8 +33,10 @@ public final class AdminUi extends FrameUi {
     };
 
     private TabContainer tabContainer;
+    private final Server server;
 
-    public AdminUi() {
+    public AdminUi(Server server) {
+        this.server = server;
         listOfTabs[1].tabButton.doClick();
     }
 
@@ -68,6 +70,7 @@ public final class AdminUi extends FrameUi {
         }
         this.mainPanel.add(navigationPane);
         this.mainPanel.add(tabContainer);
+        ordersTab.updateQueue();
     }
 
     private JPanel getNavigationContainer() {
@@ -80,7 +83,8 @@ public final class AdminUi extends FrameUi {
     private JScrollPane getNavigationPane() {
         JScrollPane navigationPane = new JScrollPane(navigationContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         navigationPane.setOpaque(false);
-        navigationPane.setPreferredSize(new Dimension(1, 1));
+        navigationPane.setPreferredSize(new Dimension(500, 1200));
+        navigationPane.setMaximumSize(new Dimension(500, 1200));
         navigationPane.getViewport().setOpaque(false);
         navigationPane.setBorder(UserUi.BORDER_STYLE);
         return navigationPane;

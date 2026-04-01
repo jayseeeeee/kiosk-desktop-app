@@ -1,10 +1,7 @@
-package app;
+package app.store;
 
-import ui.user.UserUi;
 import util.FileHandler;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
