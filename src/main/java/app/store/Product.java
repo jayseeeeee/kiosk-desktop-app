@@ -11,7 +11,7 @@ public final class Product implements Serializable {
     public final String description;
     public int quantity;
     public final double cost;
-    public final transient String imagePath;
+    public final String imagePath;
     public final transient Allergy allergies;
 
     public Product(String name, String category, String description, String imagePath, double cost, Allergy allergies) {

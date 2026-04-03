@@ -18,7 +18,6 @@ public final class BasketTab extends JPanel {
         this.userUi = userUi;
         this.setOpaque(false);
         this.setBorder(UserUi.BORDER_STYLE);
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setPreferredSize(new Dimension(1, 1));
         this.add(getBasketTitle());
         this.add(Box.createHorizontalStrut(128));

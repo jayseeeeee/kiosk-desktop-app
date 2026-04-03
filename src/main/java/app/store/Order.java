@@ -3,10 +3,8 @@ package app.store;
 import util.FileHandler;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.LinkedHashSet;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public final class Order implements Serializable {
     private static final ArrayList<Order> listOfOrders = new ArrayList<>();
@@ -21,11 +19,13 @@ public final class Order implements Serializable {
     public final int orderCount;
     public final double finalCost;
     private int status;
-    private final LinkedHashSet<Product> products;
+    private final LocalDateTime dateTime;
+    private final Set<Product> products;
 
     private Order(double finalCost, LinkedHashSet<Product> products, String paymentMethod) {
         setStatus(PAYMENT_STATUS);
         this.finalCost = finalCost;
+        this.dateTime = LocalDateTime.now();
         this.products = products;
         orderCount = ++currentOrderCount;
         try (
@@ -44,6 +44,14 @@ public final class Order implements Serializable {
 
     public int getStatus() {
         return status;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public Product[] getProducts() {
+        return products.toArray(new Product[0]);
     }
 
     public void setStatus(int status) {

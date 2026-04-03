@@ -1,8 +1,10 @@
 package ui.admin.orders;
 
 import app.store.Order;
+import app.store.Product;
 import ui.admin.AdminUi;
 import ui.admin.TabContainer;
+import ui.card.ItemCard;
 import ui.card.OrderCard;
 
 import javax.swing.*;
@@ -33,7 +35,14 @@ public final class OrdersTab extends TabContainer {
         this.adminUi.repaint();
     }
 
-    public void updateListContainer(Order order) {
+    public void updateList(Order order) {
+        viewContainer.productContainer.removeAll();
 
+        for (Product product : order.getProducts()) {
+            viewContainer.productContainer.add(new ItemCard(product));
+        }
+
+        this.adminUi.revalidate();
+        this.adminUi.repaint();
     }
 }

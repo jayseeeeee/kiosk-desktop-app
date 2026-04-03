@@ -22,7 +22,6 @@ class ListContainer extends JPanel {
         this.add(getScrollPane());
     }
 
-
     private JPanel getOrderTitleContainer() {
         JPanel orderTitleContainer = new JPanel();
         orderTitleContainer.setOpaque(false);
@@ -46,7 +45,6 @@ class ListContainer extends JPanel {
         return orderTip;
     }
 
-
     private JPanel getOrderContainer() {
         JPanel orderContainer = new JPanel();
         orderContainer.setLayout(new BoxLayout(orderContainer, BoxLayout.Y_AXIS));
@@ -55,12 +53,11 @@ class ListContainer extends JPanel {
     }
 
     private JScrollPane getScrollPane() {
-        JScrollPane scrollPane = new JScrollPane(orderContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane scrollPane = new JScrollPane(orderContainer, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(950, 400));
         scrollPane.setOpaque(false);
         scrollPane.setBorder(null);
         scrollPane.getViewport().setOpaque(false);
         return scrollPane;
     }
-
 }

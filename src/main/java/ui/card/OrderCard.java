@@ -7,8 +7,11 @@ import util.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.format.DateTimeFormatter;
 
 public class OrderCard extends Card {
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("h:mm a");
+
     public OrderCard(Order order, OrdersTab ordersTab) {
         ImageIcon statusIcon = null;
         switch (order.getStatus()) {
@@ -29,7 +32,7 @@ public class OrderCard extends Card {
         this.add(Box.createHorizontalStrut(20));
         this.add(cardImage);
         this.add(Box.createHorizontalStrut(50));
-        this.add(getTime());
+        this.add(getTime(order));
         this.add(Box.createHorizontalStrut(40));
         this.add(getAmount(order));
         this.add(Box.createHorizontalStrut(40));
@@ -44,9 +47,9 @@ public class OrderCard extends Card {
         return selectCheckBox;
     }
 
-    private JLabel getTime() {
-        JLabel time = new JLabel("10:21 AM");
-        time.setFont(new Font("Helvetica", Font.PLAIN, 24));;
+    private JLabel getTime(Order order) {
+        JLabel time = new JLabel(order.getDateTime().format(dateTimeFormatter));
+        time.setFont(new Font("Helvetica", Font.PLAIN, 24));
         time.setPreferredSize(new Dimension(128, 18));
         return time;
     }
@@ -63,7 +66,7 @@ public class OrderCard extends Card {
         detailsButton.setFocusable(false);
         detailsButton.setPreferredSize(new Dimension(128, 48));
         detailsButton.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
-        detailsButton.addActionListener(_ -> ordersTab.updateListContainer(order));
+        detailsButton.addActionListener(_ -> ordersTab.updateList(order));
         return detailsButton;
     }
 }
