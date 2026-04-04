@@ -14,13 +14,10 @@ public class ItemCard extends Card {
         if (menuImage == null) {
             menuImage = FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "no-image.png", 128);
         }
-        super(product.name, menuImage, new Dimension(128, 24));
-        this.setPreferredSize(new Dimension(420, 164));
-        this.setMaximumSize(new Dimension(420, 164));
+        super(product.name, menuImage, new Dimension(150, 24), false);
+        this.setPreferredSize(new Dimension(460, 164));
+        this.setMaximumSize(new Dimension(460, 164));
 
-        textContainer.add(this.cardTitle);
-        textContainer.setOpaque(true);
-        this.add(textContainer);
         this.add(Box.createHorizontalStrut(20));
         this.add(getItemQuantity(product));
         this.add(Box.createHorizontalStrut(20));

@@ -13,7 +13,7 @@ public final class BasketCard extends Card{
         if (menuImage == null) {
             menuImage = FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "no-image.png", 128);
         }
-        super(product.name, menuImage, new Dimension(128, 48));
+        super(product.name, menuImage, new Dimension(128, 48), true);
         this.setPreferredSize(new Dimension(420, 164));
         this.setMaximumSize(new Dimension(420, 164));
 
