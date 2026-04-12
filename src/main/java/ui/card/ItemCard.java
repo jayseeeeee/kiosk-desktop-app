@@ -14,7 +14,7 @@ public class ItemCard extends Card {
         if (menuImage == null) {
             menuImage = FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "no-image.png", 128);
         }
-        super(product.name, menuImage, new Dimension(150, 24), false);
+        super(product.name, menuImage, new Dimension(150, 48));
         this.setPreferredSize(new Dimension(460, 164));
         this.setMaximumSize(new Dimension(460, 164));
 
@@ -22,8 +22,6 @@ public class ItemCard extends Card {
         this.add(getItemQuantity(product));
         this.add(Box.createHorizontalStrut(20));
         this.add(getItemPrice(product));
-//        this.add(getQuantityComboBox(product, userUi));
-//        this.add(getTrashButton(product, userUi));
     }
 
     private JLabel getItemQuantity(Product product) {

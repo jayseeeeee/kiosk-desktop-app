@@ -19,7 +19,7 @@ public class OrderCard extends Card {
             case Order.PREPARING_STATUS -> statusIcon = FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "preparing_status.png", 48);
             case Order.SERVING_STATUS -> statusIcon = FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "serving_status.png", 48);
         }
-        super(String.format("%03d", order.orderCount), statusIcon, new Dimension(96, 42), false);
+        super(String.format("%03d", order.orderCount), statusIcon, new Dimension(96, 42));
         this.setPreferredSize(new Dimension(900, 96));
         this.setMaximumSize(new Dimension(900, 96));
         this.cardTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 32));

@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-final class Tab extends JPanel {
+public final class Tab extends JPanel {
     public final String title;
     private final String imageName;
     private final String selectedImageName;

@@ -64,9 +64,11 @@ public final class BasketTab extends JPanel {
     }
 
     public void addBasket(Product product) {
-        product.quantity = Math.min(9, ++product.quantity);
-        basketList.addFirst(product);
-        updateBasket();
+        if (product.quantity < 9) {
+            ++product.quantity;
+            basketList.addFirst(product);
+            updateBasket();
+        }
     }
 
     public void removeBasket(Product product) {

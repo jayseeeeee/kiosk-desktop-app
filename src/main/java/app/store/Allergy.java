@@ -9,7 +9,7 @@ public final class Allergy {
     public ArrayList<String> productAllergies = new ArrayList<>();
 
     public Allergy(String productAllergies) {
-        String removeQuotation = productAllergies.replaceAll("\"", "");
+        String removeQuotation = productAllergies.replace("\"", "");
         String[] allergies = removeQuotation.split(",\\s*");
 
         this.productAllergies.addAll(List.of(allergies));

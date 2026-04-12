@@ -13,7 +13,7 @@ public final class MenuCard extends Card {
         if (menuImage == null) {
             menuImage = FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "no-image.png", 240);
         }
-        super(product.name, menuImage, new Dimension(280, 40), true);
+        super(product.name, menuImage, new Dimension(280, 24), new Dimension(280, 64));
         this.setPreferredSize(new Dimension(300, 380));
 
         JLabel menuDescription = new JLabel(String.format("<html>%s</html>", product.description));

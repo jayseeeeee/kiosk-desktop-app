@@ -8,8 +8,8 @@ import util.FileHandler;
 import javax.swing.*;
 
 public class Server {
-    private AdminUi adminUi;
-    private UserUi userUi;
+    private final AdminUi adminUi;
+    private final UserUi userUi;
 
     public Server() {
         FileHandler.setDirectories();

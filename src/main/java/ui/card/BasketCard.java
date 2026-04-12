@@ -13,14 +13,10 @@ public final class BasketCard extends Card{
         if (menuImage == null) {
             menuImage = FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "no-image.png", 128);
         }
-        super(product.name, menuImage, new Dimension(128, 48), true);
+        super(product.name, menuImage, new Dimension(128, 48), new Dimension(128, 84));
         this.setPreferredSize(new Dimension(420, 164));
         this.setMaximumSize(new Dimension(420, 164));
-
-        textContainer.add(this.cardTitle);
         textContainer.add(getItemPrice(product));
-
-        this.add(textContainer);
         this.add(getQuantityComboBox(product, userUi));
         this.add(getTrashButton(product, userUi));
     }
