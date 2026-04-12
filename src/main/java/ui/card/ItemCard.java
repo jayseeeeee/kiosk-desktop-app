@@ -7,7 +7,7 @@ import util.FileHandler;
 import javax.swing.*;
 import java.awt.*;
 
-public class ItemCard extends Card {
+public final class ItemCard extends Card {
 
     public ItemCard(Product product) {
         ImageIcon menuImage = FileHandler.scaleImage(FileHandler.IMAGE_FOLDER, product.imagePath, 128, 128);

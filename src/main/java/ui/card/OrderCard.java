@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.format.DateTimeFormatter;
 
-public class OrderCard extends Card {
+public final class OrderCard extends Card {
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("h:mm a");
 
     public OrderCard(Order order, OrdersTab ordersTab) {

@@ -7,7 +7,7 @@ import util.FileHandler;
 import javax.swing.*;
 import java.awt.*;
 
-public class QueueCard extends Card {
+public final class QueueCard extends Card {
     public QueueCard(Order order) {
         ImageIcon statusIcon = null;
         switch (order.getStatus()) {
