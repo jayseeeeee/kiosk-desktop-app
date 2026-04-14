@@ -14,10 +14,9 @@ public final class ItemCard extends Card {
         if (menuImage == null) {
             menuImage = FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "no-image.png", 128);
         }
-        super(product.name, menuImage, new Dimension(150, 48));
-        this.setPreferredSize(new Dimension(460, 164));
-        this.setMaximumSize(new Dimension(460, 164));
-
+        super(product.name, menuImage, new Dimension(128, 48));
+        this.setLayout(new FlowLayout(FlowLayout.LEFT));
+        this.setMaximumSize(new Dimension(450, 164));
         this.add(Box.createHorizontalStrut(20));
         this.add(getItemQuantity(product));
         this.add(Box.createHorizontalStrut(20));

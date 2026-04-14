@@ -1,5 +1,6 @@
 package ui.admin.orders;
 
+import ui.admin.AdminUi;
 import ui.user.UserUi;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ class ViewContainer extends JPanel {
 
     ViewContainer(OrdersTab ordersTab) {
         this.ordersTab = ordersTab;
-        this.setPreferredSize(new Dimension(850, 1));
+        this.setPreferredSize(new Dimension(700, 1));
         this.setOpaque(false);
         this.add(getItemTitle());
         this.add(Box.createHorizontalStrut(20));
@@ -50,10 +51,10 @@ class ViewContainer extends JPanel {
     }
 
     private JScrollPane getScrollPane() {
-        JScrollPane scrollPane = new JScrollPane(productContainer, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setPreferredSize(new Dimension(450, 800));
-//        scrollPane.setOpaque(false);
-        scrollPane.setBorder(null);
+        JScrollPane scrollPane = new JScrollPane(productContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setPreferredSize(new Dimension(450, 500));
+        scrollPane.setOpaque(false);
+        scrollPane.setBorder(AdminUi.BORDER_STYLE);
         scrollPane.getViewport().setOpaque(false);
         return scrollPane;
     }

@@ -53,8 +53,8 @@ class ListContainer extends JPanel {
     }
 
     private JScrollPane getScrollPane() {
-        JScrollPane scrollPane = new JScrollPane(orderContainer, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setPreferredSize(new Dimension(950, 400));
+        JScrollPane scrollPane = new JScrollPane(orderContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setPreferredSize(new Dimension(940, 500));
         scrollPane.setOpaque(false);
         scrollPane.setBorder(null);
         scrollPane.getViewport().setOpaque(false);
