@@ -8,6 +8,7 @@ import ui.card.ItemCard;
 import ui.card.OrderCard;
 
 import javax.swing.*;
+import java.awt.*;
 
 public final class OrdersTab extends TabContainer {
     private final ListContainer listContainer = new ListContainer(this);
@@ -16,12 +17,12 @@ public final class OrdersTab extends TabContainer {
     public OrdersTab(AdminUi adminUi) {
         super(adminUi);
         this.add(listContainer);
-        this.add(viewContainer);
+        this.add(viewContainer, BorderLayout.EAST);
     }
 
     @Override
     public void setContainerLayout() {
-        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        this.setLayout(new BorderLayout());
     }
 
     public void updateQueue() {

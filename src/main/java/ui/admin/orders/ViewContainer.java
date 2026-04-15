@@ -14,8 +14,8 @@ class ViewContainer extends JPanel {
 
     ViewContainer(OrdersTab ordersTab) {
         this.ordersTab = ordersTab;
-        this.setPreferredSize(new Dimension(700, 1));
         this.setOpaque(false);
+        this.setPreferredSize(new Dimension(500, 1));
         this.add(getItemTitle());
         this.add(Box.createHorizontalStrut(20));
         this.add(getItemQuantityLabel());
@@ -61,7 +61,9 @@ class ViewContainer extends JPanel {
 
     private JPanel getSummaryContainer() {
         JPanel summaryContainer = new JPanel();
+        summaryContainer.setPreferredSize(new Dimension(450, 350));
         summaryContainer.setOpaque(false);
+        summaryContainer.setBorder(AdminUi.BORDER_STYLE);
         return summaryContainer;
     }
 }
