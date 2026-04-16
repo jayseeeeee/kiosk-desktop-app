@@ -1,15 +1,7 @@
 package ui.admin.orders;
 
-import ui.admin.AdminUi;
-import ui.user.UserUi;
-import util.FileHandler;
-
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Timer;
-import java.util.TimerTask;
 
 class SummaryContainer extends JPanel {
     Counter preparing = new Counter("preparing_icon.png", "Preparing");
@@ -18,10 +10,12 @@ class SummaryContainer extends JPanel {
 
     SummaryContainer() {
         this.setOpaque(false);
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 0));
-        this.setPreferredSize(new Dimension(900, 160));
+        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        this.setPreferredSize(new Dimension(850, 160));
         this.add(preparing);
+        this.add(Box.createHorizontalStrut(50));
         this.add(payment);
+        this.add(Box.createHorizontalStrut(50));
         this.add(serving);
     }
 }

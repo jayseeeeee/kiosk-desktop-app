@@ -6,7 +6,9 @@ import ui.admin.AdminUi;
 import ui.admin.TabContainer;
 import ui.card.ItemCard;
 import ui.card.OrderCard;
+import ui.card.RecentOrderCard;
 
+import javax.swing.*;
 import java.awt.*;
 
 public final class OrdersTab extends TabContainer {
@@ -29,6 +31,8 @@ public final class OrdersTab extends TabContainer {
 
         for (Order order : Order.getListOfOrders()){
             listContainer.orderContainer.add(new OrderCard(order, this));
+            listContainer.recentContainer.add(new RecentOrderCard(order));
+            listContainer.recentContainer.add(Box.createHorizontalStrut(50));
         }
 
         this.adminUi.revalidate();
