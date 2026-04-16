@@ -40,6 +40,7 @@ public final class BasketTab extends JPanel {
     private JScrollPane getScrollPane() {
         JScrollPane scrollPane = new JScrollPane(basketContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(420, 840));
+        scrollPane.setBorder(UserUi.BORDER_STYLE);
         return scrollPane;
     }
 

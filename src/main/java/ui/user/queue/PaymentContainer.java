@@ -44,6 +44,7 @@ public final class PaymentContainer extends JPanel {
         JTextField promoCode = new JTextField();
         promoCode.setPreferredSize(new Dimension(300, 48));
         promoCode.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
+        promoCode.setBorder(UserUi.BORDER_STYLE);
         promoCode.addActionListener(_ -> queueTab.validateDiscount());
         return promoCode;
     }

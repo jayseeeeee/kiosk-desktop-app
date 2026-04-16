@@ -59,6 +59,7 @@ public final class QueueTab extends JPanel {
         queueContainer.setLayout(new BoxLayout(queueContainer, BoxLayout.Y_AXIS));
         JScrollPane scrollPane = new JScrollPane(queueContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(420, 440));
+        scrollPane.setBorder(UserUi.BORDER_STYLE);
         return scrollPane;
     }
 

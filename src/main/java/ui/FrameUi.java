@@ -26,7 +26,7 @@ public abstract class FrameUi extends JFrame {
         this.setIconImage(icon);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setUndecorated(true);
-        this.setAlwaysOnTop(true);
+//        this.setAlwaysOnTop(true);
         this.getContentPane().setBackground(MAIN_COLOR);
 //        this.getContentPane().setBackground(Color.PINK);
         this.setExtendedState(Frame.MAXIMIZED_BOTH);

@@ -17,6 +17,7 @@ public class Server {
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.put("ComboBox.selectionBackground", FrameUi.SELECTED_COLOR);
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             IO.println(e);
         }

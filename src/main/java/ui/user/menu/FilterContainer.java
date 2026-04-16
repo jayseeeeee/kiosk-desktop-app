@@ -25,6 +25,7 @@ public final class FilterContainer extends JPanel {
         JTextField searchField = new JTextField();
         searchField.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
         searchField.setPreferredSize(new Dimension(320, 48));
+        searchField.setBorder(UserUi.BORDER_STYLE);
         searchField.addActionListener(_ -> menuTab.updateMenuContainer());
         return searchField;
     }
