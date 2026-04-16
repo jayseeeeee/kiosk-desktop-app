@@ -19,7 +19,6 @@ class ListContainer extends JPanel {
     ListContainer(OrdersTab ordersTab) {
         this.ordersTab = ordersTab;
         this.setOpaque(false);
-        this.setPreferredSize(new Dimension(800, 1));
         this.add(Box.createRigidArea(new Dimension(1000, 20)));
         this.add(new InfoContainer());
         this.add(getScrollPane());
@@ -34,7 +33,7 @@ class ListContainer extends JPanel {
 
     private JScrollPane getScrollPane() {
         JScrollPane scrollPane = new JScrollPane(orderContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setPreferredSize(new Dimension(900, 450));
+        scrollPane.setPreferredSize(new Dimension(850, 450));
         scrollPane.setOpaque(false);
         scrollPane.setBorder(null);
         scrollPane.getViewport().setOpaque(false);
