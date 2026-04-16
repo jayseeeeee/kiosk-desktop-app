@@ -32,7 +32,7 @@ final class InfoContainer extends JPanel {
     }
 
     private JLabel getOrderTitle() {
-        JLabel orderTitle = new JLabel("CURRENT ORDERS");
+        JLabel orderTitle = new JLabel("ORDER TAB");
         orderTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 36));
         orderTitle.setForeground(AdminUi.SELECTED_COLOR);
         return orderTitle;
