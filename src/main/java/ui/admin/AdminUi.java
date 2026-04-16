@@ -3,7 +3,6 @@ package ui.admin;
 import ui.FrameUi;
 import ui.Server;
 import ui.admin.analytics.AnalyticsTab;
-import ui.admin.dashboard.DashboardTab;
 import ui.admin.history.HistoryTab;
 import ui.admin.orders.OrdersTab;
 import ui.admin.settings.SettingsTab;
@@ -18,14 +17,12 @@ public final class AdminUi extends FrameUi {
     private final JPanel navigationContainer = getNavigationContainer();
     private final JScrollPane navigationPane = getNavigationPane();
 
-    public final DashboardTab dashboardTab = new DashboardTab(this);
     public final OrdersTab ordersTab = new OrdersTab(this);
     public final HistoryTab historyTab = new HistoryTab(this);
     public final AnalyticsTab analyticsTab = new AnalyticsTab(this);
     public final SettingsTab settingsTab = new SettingsTab(this);
 
     final Tab[] listOfTabs = {
-        new Tab(this, "DASHBOARD", "dashboard.png", "dashboard_selected.png"),
         new Tab(this, "ORDERS", "orders.png", "orders_selected.png"),
         new Tab(this, "HISTORY", "history.png", "history_selected.png"),
         new Tab(this, "ANALYTICS", "analytics.png", "analytics_selected.png"),
@@ -53,7 +50,6 @@ public final class AdminUi extends FrameUi {
 
     public void setTabContainer(Tab tab) {
         switch (tab.title) {
-            case "DASHBOARD" -> tabContainer = dashboardTab;
             case "ORDERS" -> tabContainer = ordersTab;
             case "HISTORY" -> tabContainer = historyTab;
             case "ANALYTICS" -> tabContainer = analyticsTab;
