@@ -1,15 +1,7 @@
 package ui.admin.orders;
 
-import ui.admin.AdminUi;
-import ui.user.UserUi;
-import util.FileHandler;
-
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Timer;
-import java.util.TimerTask;
 
 class ListContainer extends JPanel {
     JPanel orderContainer = getOrderContainer();
@@ -21,6 +13,7 @@ class ListContainer extends JPanel {
         this.setOpaque(false);
         this.add(Box.createRigidArea(new Dimension(1000, 20)));
         this.add(new InfoContainer());
+        this.add(new SearchContainer(ordersTab));
         this.add(getScrollPane());
     }
 

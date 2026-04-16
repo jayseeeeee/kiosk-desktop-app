@@ -24,8 +24,6 @@ public final class OrderCard extends Card {
         this.setMaximumSize(new Dimension(900, 96));
         this.cardTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 32));
         this.add(Box.createVerticalStrut(80));
-        this.add(getSelectCheckBox());
-        this.add(Box.createHorizontalStrut(widthGap));
         this.add(this.cardTitle);
         this.add(Box.createHorizontalStrut(widthGap));
         this.add(this.cardImage);
@@ -35,14 +33,6 @@ public final class OrderCard extends Card {
         this.add(getAmount(order));
         this.add(Box.createHorizontalStrut(widthGap));
         this.add(getDetailsButton(order, ordersTab));
-    }
-
-    private JCheckBox getSelectCheckBox() {
-        JCheckBox selectCheckBox = new JCheckBox();
-        selectCheckBox.setBorderPainted(false);
-        selectCheckBox.setContentAreaFilled(false);
-        selectCheckBox.setFocusable(false);
-        return selectCheckBox;
     }
 
     private JLabel getTime(Order order) {
@@ -64,7 +54,7 @@ public final class OrderCard extends Card {
         detailsButton.setFocusable(false);
         detailsButton.setPreferredSize(new Dimension(128, 48));
         detailsButton.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
-        detailsButton.addActionListener(_ -> ordersTab.updateList(order));
+        detailsButton.addActionListener(_ -> ordersTab.viewOrder(order));
         return detailsButton;
     }
 }

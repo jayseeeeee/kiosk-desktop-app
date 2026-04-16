@@ -7,7 +7,6 @@ import ui.admin.TabContainer;
 import ui.card.ItemCard;
 import ui.card.OrderCard;
 
-import javax.swing.*;
 import java.awt.*;
 
 public final class OrdersTab extends TabContainer {
@@ -36,7 +35,7 @@ public final class OrdersTab extends TabContainer {
         this.adminUi.repaint();
     }
 
-    public void updateList(Order order) {
+    public void viewOrder(Order order) {
         viewContainer.productContainer.removeAll();
 
         for (Product product : order.getProducts()) {
