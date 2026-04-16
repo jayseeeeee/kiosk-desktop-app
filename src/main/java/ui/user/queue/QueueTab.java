@@ -14,7 +14,7 @@ public final class QueueTab extends JPanel {
 
     private final CostContainer costContainer = new CostContainer();
     private final PaymentContainer paymentContainer = new PaymentContainer(this);
-    private final JPanel queueContainer = new JPanel();
+    private final JPanel queueContainer = getQueueContainer();
 
     private double initialCost;
     private double finalCost;
@@ -55,11 +55,19 @@ public final class QueueTab extends JPanel {
         return statusTitle;
     }
 
-    private JScrollPane getScrollPane() {
+    private JPanel getQueueContainer() {
+        JPanel queueContainer = new JPanel();
         queueContainer.setLayout(new BoxLayout(queueContainer, BoxLayout.Y_AXIS));
+        queueContainer.setOpaque(false);
+        return queueContainer;
+    }
+
+    private JScrollPane getScrollPane() {
         JScrollPane scrollPane = new JScrollPane(queueContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(420, 440));
         scrollPane.setBorder(UserUi.BORDER_STYLE);
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setOpaque(false);
         return scrollPane;
     }
 

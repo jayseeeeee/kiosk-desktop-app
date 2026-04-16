@@ -10,7 +10,7 @@ import java.util.LinkedHashSet;
 
 public final class BasketTab extends JPanel {
     private final UserUi userUi;
-    private final JPanel basketContainer = new JPanel();
+    private final JPanel basketContainer = getBasketContainer();
 
     public final LinkedHashSet<Product> basketList = new LinkedHashSet<>();
 
@@ -37,10 +37,18 @@ public final class BasketTab extends JPanel {
         return orderNumber;
     }
 
+    private JPanel getBasketContainer() {
+        JPanel basketContainer = new JPanel();
+        basketContainer.setOpaque(false);
+        return basketContainer;
+    }
+
     private JScrollPane getScrollPane() {
         JScrollPane scrollPane = new JScrollPane(basketContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(420, 840));
         scrollPane.setBorder(UserUi.BORDER_STYLE);
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setOpaque(false);
         return scrollPane;
     }
 
@@ -49,7 +57,6 @@ public final class BasketTab extends JPanel {
         if (basketList.isEmpty()) {
             basketContainer.setLayout(new BorderLayout());
             JLabel emptyResultTitle = new JLabel("BASKET IS EMPTY");
-            emptyResultTitle.setOpaque(true);
             emptyResultTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
             emptyResultTitle.setHorizontalAlignment(JLabel.CENTER);
             basketContainer.add(emptyResultTitle);
