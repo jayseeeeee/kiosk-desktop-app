@@ -10,16 +10,20 @@ import java.awt.*;
 public final class ItemCard extends Card {
 
     public ItemCard(Product product) {
-        ImageIcon menuImage = FileHandler.scaleImage(FileHandler.IMAGE_FOLDER, product.imagePath, 128, 128);
+        ImageIcon menuImage = FileHandler.scaleImage(FileHandler.IMAGE_FOLDER, product.imagePath, 100, 100);
         if (menuImage == null) {
-            menuImage = FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "no-image.png", 128);
+            menuImage = FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "no-image.png", 100);
         }
-        super(product.name, menuImage, new Dimension(128, 48));
+        super(product.name, menuImage, new Dimension(140, 48));
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
-        this.setMaximumSize(new Dimension(450, 164));
-        this.add(Box.createHorizontalStrut(20));
+        this.setMaximumSize(new Dimension(450, 120));
+        this.add(Box.createHorizontalStrut(10));
+        this.add(this.cardImage);
+        this.add(Box.createHorizontalStrut(10));
+        this.add(this.cardTitle);
+        this.add(Box.createHorizontalStrut(10));
         this.add(getItemQuantity(product));
-        this.add(Box.createHorizontalStrut(20));
+        this.add(Box.createHorizontalStrut(30));
         this.add(getItemPrice(product));
     }
 

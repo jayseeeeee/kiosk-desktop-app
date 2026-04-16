@@ -16,13 +16,22 @@ class ViewContainer extends JPanel {
         this.ordersTab = ordersTab;
         this.setOpaque(false);
         this.setPreferredSize(new Dimension(500, 1));
-        this.add(getItemTitle());
-        this.add(Box.createHorizontalStrut(20));
-        this.add(getItemQuantityLabel());
-        this.add(Box.createHorizontalStrut(20));
-        this.add(getItemPriceLabel());
+        this.add(Box.createRigidArea(new Dimension(1000, 20)));
+        this.add(getItemContainer());
         this.add(getScrollPane());
         this.add(summaryContainer);
+    }
+
+    private JPanel getItemContainer() {
+        JPanel itemContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        itemContainer.setPreferredSize(new Dimension(450, 50));
+        itemContainer.setOpaque(false);
+        itemContainer.add(getItemTitle());
+        itemContainer.add(Box.createHorizontalStrut(130));
+        itemContainer.add(getItemQuantityLabel());
+        itemContainer.add(Box.createHorizontalStrut(10));
+        itemContainer.add(getItemPriceLabel());
+        return itemContainer;
     }
 
     private JLabel getItemTitle() {
