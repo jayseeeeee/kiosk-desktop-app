@@ -33,7 +33,7 @@ final class SearchContainer extends JPanel {
     private JButton getSearchButton() {
         JButton searchButton = new JButton(FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "search.png", 40));
         searchButton.setContentAreaFilled(false);
-        searchButton.setFocusPainted(false);
+        searchButton.setFocusable(false);
         searchButton.addActionListener(_ -> ordersTab.updateQueue());
         return searchButton;
     }

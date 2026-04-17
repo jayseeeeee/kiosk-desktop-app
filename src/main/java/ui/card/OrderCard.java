@@ -1,6 +1,7 @@
 package ui.card;
 
 import app.store.Order;
+import ui.admin.AdminUi;
 import ui.admin.orders.OrdersTab;
 import ui.user.UserUi;
 import util.FileHandler;
@@ -50,10 +51,9 @@ public final class OrderCard extends Card {
     }
 
     private JButton getDetailsButton(Order order, OrdersTab ordersTab) {
-        JButton detailsButton = new JButton("DETAILS");
+        JButton detailsButton = new JButton(FileHandler.scaleImage(FileHandler.ASSETS_FOLDER, "details.png", 32));
+        detailsButton.setContentAreaFilled(false);
         detailsButton.setFocusable(false);
-        detailsButton.setPreferredSize(new Dimension(128, 48));
-        detailsButton.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
         detailsButton.addActionListener(_ -> ordersTab.viewOrder(order));
         return detailsButton;
     }
