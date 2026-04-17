@@ -26,6 +26,7 @@ public final class PaymentContainer extends JPanel {
     private JLabel getPaymentTitle() {
         JLabel paymentTitle = new JLabel("PAYMENT");
         paymentTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 36));
+        paymentTitle.setForeground(UserUi.SELECTED_COLOR);
         return paymentTitle;
     }
 

@@ -109,13 +109,15 @@ public final class MenuTab extends JPanel{
         emptyResultTitle.setHorizontalAlignment(JLabel.CENTER);
         emptyResultTitle.setVerticalAlignment(JLabel.BOTTOM);
         emptyResultTitle.setPreferredSize(new Dimension(1000, 400));
+        emptyResultTitle.setForeground(UserUi.DEFAULT_COLOR);
         return emptyResultTitle;
     }
 
     private JLabel getEmptyResultTip() {
-        JLabel emptyResultTip = new JLabel("TRY ADJUSTING YOUR SEARCH FILTER.");
+        JLabel emptyResultTip = new JLabel("TRY ADJUSTING YOUR SEARCH FILTER");
         emptyResultTip.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
         emptyResultTip.setHorizontalAlignment(JLabel.CENTER);
+        emptyResultTip.setForeground(UserUi.SELECTED_COLOR);
         return emptyResultTip;
     }
 

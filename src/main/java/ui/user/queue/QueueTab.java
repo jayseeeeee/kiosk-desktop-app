@@ -27,10 +27,11 @@ public final class QueueTab extends JPanel {
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setPreferredSize(new Dimension(1, 1));
         this.add(getQueueTitle());
-        this.add(Box.createHorizontalStrut(32));
+        this.add(Box.createHorizontalStrut(20));
         this.add(getOrderNumber());
-        this.add(Box.createHorizontalStrut(16));
+        this.add(Box.createHorizontalStrut(20));
         this.add(getStatusTitle());
+        this.add(Box.createHorizontalStrut(80));
         this.add(getScrollPane());
         this.add(paymentContainer);
         this.add(costContainer);
@@ -40,18 +41,21 @@ public final class QueueTab extends JPanel {
     private JLabel getQueueTitle() {
         JLabel queueTitle = new JLabel("QUEUE");
         queueTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 36));
+        queueTitle.setForeground(UserUi.SELECTED_COLOR);
         return queueTitle;
     }
 
     private JLabel getOrderNumber() {
-        JLabel orderNumber = new JLabel("ORDER NUMBER");
+        JLabel orderNumber = new JLabel("NUMBER");
         orderNumber.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
+        orderNumber.setForeground(UserUi.DEFAULT_COLOR);
         return orderNumber;
     }
 
     private JLabel getStatusTitle() {
         JLabel statusTitle = new JLabel("STATUS");
         statusTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
+        statusTitle.setForeground(UserUi.DEFAULT_COLOR);
         return statusTitle;
     }
 

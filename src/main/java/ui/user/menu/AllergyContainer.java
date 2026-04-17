@@ -22,6 +22,7 @@ public final class AllergyContainer extends JPanel {
     private JLabel getAllergyTitle() {
         JLabel allergyTitle = new JLabel("FILTER FOOD ALLERGY");
         allergyTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
+        allergyTitle.setForeground(UserUi.DEFAULT_COLOR);
         return allergyTitle;
     }
 

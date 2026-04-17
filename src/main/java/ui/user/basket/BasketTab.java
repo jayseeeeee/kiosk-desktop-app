@@ -20,20 +20,23 @@ public final class BasketTab extends JPanel {
         this.setBorder(UserUi.BORDER_STYLE);
         this.setPreferredSize(new Dimension(1, 1));
         this.add(getBasketTitle());
-        this.add(Box.createHorizontalStrut(128));
+        this.add(Box.createHorizontalStrut(140));
         this.add(getBasketDescription());
+        this.add(Box.createHorizontalStrut(20));
         this.add(getScrollPane());
     }
 
     private JLabel getBasketTitle() {
         JLabel queueTitle = new JLabel("BASKET");
         queueTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 36));
+        queueTitle.setForeground(UserUi.SELECTED_COLOR);
         return queueTitle;
     }
 
     private JLabel getBasketDescription() {
         JLabel orderNumber = new JLabel("EDIT ORDER");
         orderNumber.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
+        orderNumber.setForeground(UserUi.DEFAULT_COLOR);
         return orderNumber;
     }
 
@@ -59,6 +62,7 @@ public final class BasketTab extends JPanel {
             JLabel emptyResultTitle = new JLabel("BASKET IS EMPTY");
             emptyResultTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
             emptyResultTitle.setHorizontalAlignment(JLabel.CENTER);
+            emptyResultTitle.setForeground(UserUi.DEFAULT_COLOR);
             basketContainer.add(emptyResultTitle);
         } else {
             basketContainer.setLayout(new BoxLayout(basketContainer, BoxLayout.Y_AXIS));
