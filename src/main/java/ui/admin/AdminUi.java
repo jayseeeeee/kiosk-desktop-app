@@ -34,7 +34,7 @@ public final class AdminUi extends FrameUi {
 
     public AdminUi(Server server) {
         this.server = server;
-        listOfTabs[1].tabButton.doClick();
+        listOfTabs[0].tabButton.doClick();
     }
 
     @Override

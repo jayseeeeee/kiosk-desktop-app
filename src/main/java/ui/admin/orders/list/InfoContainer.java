@@ -1,4 +1,4 @@
-package ui.admin.orders;
+package ui.admin.orders.list;
 
 import ui.admin.AdminUi;
 import ui.user.UserUi;
@@ -11,9 +11,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Timer;
 import java.util.TimerTask;
 
-final class InfoContainer extends JPanel {
+public final class InfoContainer extends JPanel {
 
-    InfoContainer() {
+    public InfoContainer() {
         this.setOpaque(false);
         this.setPreferredSize(new Dimension(900, 90));
         this.add(getOrderContainer());

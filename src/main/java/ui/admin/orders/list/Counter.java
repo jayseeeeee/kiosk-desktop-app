@@ -1,4 +1,4 @@
-package ui.admin.orders;
+package ui.admin.orders.list;
 
 import ui.admin.AdminUi;
 import ui.user.UserUi;
@@ -6,10 +6,6 @@ import util.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 class Counter extends JPanel {

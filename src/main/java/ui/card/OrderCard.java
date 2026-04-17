@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 
 public final class OrderCard extends Card {
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("h:mm a");
-    private static final int widthGap = 30;
+    private static final int widthGap = 50;
 
     public OrderCard(Order order, OrdersTab ordersTab) {
         ImageIcon statusIcon = null;

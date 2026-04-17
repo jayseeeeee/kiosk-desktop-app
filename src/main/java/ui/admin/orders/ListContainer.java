@@ -1,44 +1,36 @@
 package ui.admin.orders;
 
 import ui.admin.AdminUi;
-import ui.user.UserUi;
+import ui.admin.orders.list.InfoContainer;
+import ui.admin.orders.list.RecentContainer;
+import ui.admin.orders.list.SearchContainer;
+import ui.admin.orders.list.SummaryContainer;
 
 import javax.swing.*;
 import java.awt.*;
 
 class ListContainer extends JPanel {
-    JPanel orderContainer = getOrderContainer();
-    RecentContainer recentContainer = new RecentContainer();
-
     private final OrdersTab ordersTab;
+
+    public final InfoContainer infoContainer;
+    public final SummaryContainer summaryContainer;
+    public final RecentContainer recentContainer;
+    public final SearchContainer searchContainer;
+    public final JPanel orderContainer = getOrderContainer();
 
     ListContainer(OrdersTab ordersTab) {
         this.ordersTab = ordersTab;
+        this.infoContainer = new InfoContainer();
+        this.summaryContainer = new SummaryContainer();
+        this.recentContainer = new RecentContainer();
+        this.searchContainer = new SearchContainer(ordersTab);
         this.setOpaque(false);
         this.add(Box.createRigidArea(new Dimension(1000, 20)));
-        this.add(new InfoContainer());
-        this.add(new SummaryContainer());
-        this.add(getRecentTitle());
+        this.add(infoContainer);
+        this.add(summaryContainer);
         this.add(recentContainer);
-        this.add(getSummaryTitle());
-        this.add(new SearchContainer(ordersTab));
+        this.add(searchContainer);
         this.add(getScrollPane());
-    }
-
-    private JLabel getRecentTitle() {
-        JLabel recentTitle = new JLabel("RECENTLY PLACED");
-        recentTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 24));
-        recentTitle.setPreferredSize(new Dimension(850, 40));
-        recentTitle.setForeground(UserUi.SELECTED_COLOR);
-        return recentTitle;
-    }
-
-    private JLabel getSummaryTitle() {
-        JLabel summaryTitle = new JLabel("LIST OF ORDERS");
-        summaryTitle.setFont(new Font(UserUi.FONT, Font.BOLD, 24));
-        summaryTitle.setPreferredSize(new Dimension(850, 40));
-        summaryTitle.setForeground(UserUi.SELECTED_COLOR);
-        return summaryTitle;
     }
 
     private JPanel getOrderContainer() {
