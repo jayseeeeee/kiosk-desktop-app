@@ -1,7 +1,6 @@
 package ui.card;
 
 import app.store.Order;
-import ui.admin.AdminUi;
 import ui.admin.orders.OrdersTab;
 import ui.user.UserUi;
 import util.FileHandler;
