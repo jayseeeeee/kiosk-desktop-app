@@ -134,7 +134,7 @@ public final class ManageContainer extends JPanel {
         System.out.println(discount);
         if (discount > 0) {
             this.add(Box.createHorizontalStrut(205));
-            JLabel discountLabel = new JLabel(String.format("-₱%.2f", discount));
+            JLabel discountLabel = new JLabel(String.format("–₱%.2f", discount));
             discountLabel.setForeground(UserUi.DEFAULT_COLOR);
             discountLabel.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
             discountLabel.setHorizontalAlignment(SwingConstants.RIGHT);
