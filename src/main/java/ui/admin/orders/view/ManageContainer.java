@@ -119,7 +119,6 @@ public final class ManageContainer extends JPanel {
         initialCostLabel.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
         initialCostLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         initialCostLabel.setPreferredSize(new Dimension(100, 18));
-        initialCostLabel.setOpaque(true);
         return initialCostLabel;
     }
 
@@ -136,7 +135,6 @@ public final class ManageContainer extends JPanel {
         if (discount > 0) {
             this.add(Box.createHorizontalStrut(205));
             JLabel discountLabel = new JLabel(String.format("-₱%.2f", discount));
-            discountLabel.setOpaque(true);
             discountLabel.setForeground(UserUi.DEFAULT_COLOR);
             discountLabel.setFont(new Font(UserUi.FONT, Font.BOLD, 18));
             discountLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -169,7 +167,6 @@ public final class ManageContainer extends JPanel {
         finalCost.setPreferredSize(new Dimension(150, 30));
         finalCost.setHorizontalAlignment(SwingConstants.RIGHT);
         finalCost.setFont(new Font(UserUi.FONT, Font.BOLD, 28));
-        finalCost.setOpaque(true);
         return finalCost;
     }
 }
