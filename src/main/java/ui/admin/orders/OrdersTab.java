@@ -14,6 +14,7 @@ import java.awt.*;
 public final class OrdersTab extends TabContainer {
     private final ListContainer listContainer = new ListContainer(this);
     private final ViewContainer viewContainer = new ViewContainer(this);
+    private Order order;
 
     public OrdersTab(AdminUi adminUi) {
         super(adminUi);
@@ -41,13 +42,15 @@ public final class OrdersTab extends TabContainer {
 
     public void viewOrder(Order order) {
         viewContainer.productContainer.removeAll();
-
-        for (Product product : order.getProducts()) {
-            viewContainer.productContainer.add(new ItemCard(product));
+        if (order == null || order == this.order) {
+            this.order = null;
+        } else {
+            this.order = order;
+            for (Product product : order.getProducts()) {
+                viewContainer.productContainer.add(new ItemCard(product));
+            }
         }
-
-        viewContainer.manageContainer.setOrder(order);
-
+        viewContainer.manageContainer.setOrder(this.order);
         this.adminUi.revalidate();
         this.adminUi.repaint();
     }

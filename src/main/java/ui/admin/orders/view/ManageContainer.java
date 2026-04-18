@@ -26,7 +26,7 @@ public final class ManageContainer extends JPanel {
     public void setOrder(Order order) {
         this.removeAll();
         this.add(getPaymentTitle());
-        if (order == null || order == this.order) {
+        if (order == null) {
             this.order = null;
             this.add(Box.createVerticalStrut(62));
             this.add(getEmptyTextLabel());
