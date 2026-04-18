@@ -46,6 +46,8 @@ public final class OrdersTab extends TabContainer {
             viewContainer.productContainer.add(new ItemCard(product));
         }
 
+        viewContainer.manageContainer.setOrder(order);
+
         this.adminUi.revalidate();
         this.adminUi.repaint();
     }
