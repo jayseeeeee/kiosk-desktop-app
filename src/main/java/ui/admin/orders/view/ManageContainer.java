@@ -37,7 +37,7 @@ public final class ManageContainer extends JPanel {
     }
 
     private JLabel getEmptyTextLabel() {
-        JLabel emptyLabel = new JLabel("SELECT A PRODUCT TO VIEW DETAIL");
+        JLabel emptyLabel = new JLabel("NO ORDER SELECTED");
         emptyLabel.setPreferredSize(new Dimension(450, 250));
         emptyLabel.setFont(new Font(UserUi.FONT,  Font.BOLD, 16));
         emptyLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -48,7 +48,6 @@ public final class ManageContainer extends JPanel {
     private void getOrderDetails() {
         this.add(Box.createHorizontalStrut(150));
         this.add(getOrderNumber());
-
 
         this.add(getTimeTitle());
         this.add(Box.createHorizontalStrut(30));

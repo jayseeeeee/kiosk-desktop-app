@@ -2,13 +2,14 @@ package ui.admin.orders;
 
 import ui.admin.AdminUi;
 import ui.admin.orders.view.ManageContainer;
+import ui.admin.orders.view.ProductContainer;
 import ui.user.UserUi;
 
 import javax.swing.*;
 import java.awt.*;
 
 class ViewContainer extends JPanel {
-    JPanel productContainer = getProductContainer();
+    ProductContainer productContainer = new ProductContainer();
     ManageContainer manageContainer = new ManageContainer();
 
     private final OrdersTab ordersTab;
@@ -20,7 +21,7 @@ class ViewContainer extends JPanel {
         this.setBorder(AdminUi.BORDER_STYLE);
         this.add(Box.createRigidArea(new Dimension(1000, 20)));
         this.add(getItemContainer());
-        this.add(getScrollPane());
+        this.add(productContainer.scrollPane);
         this.add(manageContainer);
     }
 
@@ -55,21 +56,5 @@ class ViewContainer extends JPanel {
         price.setFont(new Font(UserUi.FONT, Font.BOLD, 16));
         price.setForeground(AdminUi.DEFAULT_COLOR);
         return price;
-    }
-
-    private JPanel getProductContainer() {
-        JPanel orderContainer = new JPanel();
-        orderContainer.setLayout(new BoxLayout(orderContainer, BoxLayout.Y_AXIS));
-        orderContainer.setOpaque(false);
-        return orderContainer;
-    }
-
-    private JScrollPane getScrollPane() {
-        JScrollPane scrollPane = new JScrollPane(productContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setPreferredSize(new Dimension(450, 500));
-        scrollPane.setOpaque(false);
-        scrollPane.setBorder(AdminUi.BORDER_STYLE);
-        scrollPane.getViewport().setOpaque(false);
-        return scrollPane;
     }
 }
